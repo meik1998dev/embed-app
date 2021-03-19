@@ -25,11 +25,12 @@ const Glossary = ({ glossaryId }) => {
   }
 
   return (
-    <div className="gl-p-5">
-      <div className="gl-bg-secondary gl-p-5">
-        <p className="gl-text-text">Glossary: </p>
-      </div>
-      <p className="gl-text-primary">{glossaryId}</p>
+    <div className="gl-p-5 gl-font-main">
+      <div className="gl-bg-row gl-mb-2 gl-p-2">Bg row</div>
+      <div className="gl-text-text">Text color</div>
+      <div className="gl-text-primary">Primary color</div>
+      <div className="gl-text-gray">Gray color</div>
+      <div>Glossary ID: {glossaryId}</div>
     </div>
   )
 }

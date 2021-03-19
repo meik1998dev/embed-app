@@ -10,9 +10,10 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: 'var(--gl-color-primary)',
-        secondary: 'var(--gl-color-secondary)',
+        row: 'var(--gl-color-row)',
         text: 'var(--gl-color-text)',
+        primary: 'var(--gl-color-primary)',
+        gray: 'var(--gl-color-gray)',
       },
     },
     backgroundColor: (theme) => ({

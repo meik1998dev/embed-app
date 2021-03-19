@@ -31,11 +31,7 @@ const Setup = ({ glossaryId }) => {
 
   applyTheme(theme)
 
-  return (
-    <div className="gl-font-main">
-      <Glossary glossaryId={glossaryId} />
-    </div>
-  )
+  return <Glossary glossaryId={glossaryId} />
 }
 
 Setup.propTypes = {

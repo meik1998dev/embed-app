@@ -29,13 +29,13 @@ const App = ({ glossaryId }) => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <div>
+      <>
         {initialized ? (
           <Setup glossaryId={glossaryId} />
         ) : (
-          <p>Caricamento...</p>
+          <div>Caricamento...</div>
         )}
-      </div>
+      </>
 
       <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
     </QueryClientProvider>
