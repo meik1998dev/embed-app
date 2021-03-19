@@ -1,6 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 import ReactDOM from 'react-dom'
 import App from './App'
+import './index.css'
 
 export class init {
   start(

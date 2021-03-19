@@ -1,7 +1,7 @@
 import Api from 'Api/Api'
-import Glossary from 'Components/Glossary/Glossary'
+import Setup from 'Components/Setup/Setup'
 import PropTypes from 'prop-types'
-import { useEffect, useState } from 'react'
+import { memo, useEffect, useState } from 'react'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
 import './index.css'
@@ -19,20 +19,19 @@ const App = ({ glossaryId }) => {
   const [initialized, setInitialized] = useState(false)
 
   useEffect(() => {
-    const initApi = async () => {
+    const initApp = async () => {
       await Api.init({ baseURL: '' })
-
       setInitialized(true)
     }
 
-    initApi()
+    initApp()
   }, [])
 
   return (
     <QueryClientProvider client={queryClient}>
       <div>
         {initialized ? (
-          <Glossary glossaryId={glossaryId} />
+          <Setup glossaryId={glossaryId} />
         ) : (
           <p>Caricamento...</p>
         )}
@@ -47,4 +46,4 @@ App.propTypes = {
   glossaryId: PropTypes.string.isRequired,
 }
 
-export default App
+export default memo(App)

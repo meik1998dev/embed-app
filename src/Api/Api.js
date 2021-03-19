@@ -1,4 +1,5 @@
 import axios from 'axios'
+import defaultTheme from 'Theme/defaultTheme'
 import fakeApi from './fakeApi'
 
 const deepFreeze = (object) => {
@@ -51,9 +52,23 @@ const Api = {
     })
   },
 
+  getConfig: async (glossaryId) => {
+    await get(`/`, { config: true }).then((res) => res.data)
+    await fakeApi(200)
+
+    return {
+      glossaryId,
+      theme: defaultTheme,
+      alphabet: true,
+      search: true,
+      arrowIcon: 'arrow-icon-path',
+    }
+  },
+
   getGlossary: async (glossaryId) => {
     await get(`/`, { glossaryId }).then((res) => res.data)
-    await fakeApi(100)
+    await fakeApi(400)
+
     return glossaryId
   },
 }
