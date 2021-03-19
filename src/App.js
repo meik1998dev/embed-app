@@ -1,16 +1,25 @@
 import Api from 'Api/Api'
-import fakeApi from 'Api/fakeApi'
 import Glossary from 'Components/Glossary/Glossary'
 import PropTypes from 'prop-types'
 import { useEffect, useState } from 'react'
+import { QueryClient, QueryClientProvider } from 'react-query'
+import { ReactQueryDevtools } from 'react-query/devtools'
 import './index.css'
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      retry: false,
+    },
+  },
+})
 
 const App = ({ glossaryId }) => {
   const [initialized, setInitialized] = useState(false)
 
   useEffect(() => {
     const initApi = async () => {
-      await fakeApi(500)
       await Api.init({ baseURL: '' })
 
       setInitialized(true)
@@ -20,13 +29,17 @@ const App = ({ glossaryId }) => {
   }, [])
 
   return (
-    <div>
-      {initialized ? (
-        <Glossary glossaryId={glossaryId} />
-      ) : (
-        <p>Caricamento...</p>
-      )}
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <div>
+        {initialized ? (
+          <Glossary glossaryId={glossaryId} />
+        ) : (
+          <p>Caricamento...</p>
+        )}
+      </div>
+
+      <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
+    </QueryClientProvider>
   )
 }
 

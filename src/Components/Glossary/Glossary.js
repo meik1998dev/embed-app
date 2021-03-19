@@ -1,26 +1,15 @@
 import Api from 'Api/Api'
 import PropTypes from 'prop-types'
-import { memo, useEffect, useState } from 'react'
+import { memo } from 'react'
+import { useQuery } from 'react-query'
 
 const Glossary = ({ glossaryId }) => {
-  const [fetched, setFetched] = useState(false)
-  const [err, setErr] = useState(null)
+  const { isLoading, isError, data, error } = useQuery(
+    ['glossary', glossaryId],
+    () => Api.getGlossary(glossaryId)
+  )
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        await Api.getGlossary(glossaryId)
-      } catch (error) {
-        setErr(error)
-      } finally {
-        setFetched(true)
-      }
-    }
-
-    fetchData()
-  }, [])
-
-  if (!fetched) {
+  if (isLoading) {
     return (
       <div>
         <p>Caricamento...</p>
@@ -28,13 +17,15 @@ const Glossary = ({ glossaryId }) => {
     )
   }
 
-  if (err) {
+  if (isError) {
     return (
       <div>
-        <p>Errore: {err.message}</p>
+        <p>Errore: {error?.message}</p>
       </div>
     )
   }
+
+  console.log(data)
 
   return (
     <div>
