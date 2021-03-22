@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 import { memo, useEffect, useState } from 'react'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
-import './index.css'
 
 const App = ({ glossaryId }) => {
   const [initialized, setInitialized] = useState(false)

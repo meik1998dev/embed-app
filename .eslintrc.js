@@ -27,6 +27,8 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
     'react/no-render-return-value': 'off',
+    'react/no-danger': 'off',
+    'react/require-default-props': 'off',
     'no-restricted-syntax': 'off',
     'jsx-a11y/click-events-have-key-events': 'off',
     'jsx-a11y/no-static-element-interactions': 'off',

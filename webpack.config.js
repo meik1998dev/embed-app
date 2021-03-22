@@ -44,14 +44,8 @@ module.exports = {
         use: ['babel-loader'],
       },
       {
-        test: /\.css$/i,
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-          },
-          'css-loader',
-          'postcss-loader',
-        ],
+        test: /\.s[ac]ss$/i,
+        use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
       },
       {
         test: /\.(png|jpg|svg)$/i,
@@ -68,7 +62,7 @@ module.exports = {
       chunks: ['index'],
     }),
     new MiniCssExtractPlugin({
-      filename: 'index.css',
+      filename: 'index.scss',
       chunkFilename: '[id].css',
     }),
   ].concat(multipleHtmlPlugins),
