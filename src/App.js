@@ -1,19 +1,10 @@
 import Api from 'Api/Api'
-import Setup from 'Components/Setup/Setup'
+import Wrapper from 'Components/Wrapper/Wrapper'
 import PropTypes from 'prop-types'
 import { memo, useEffect, useState } from 'react'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
 import './index.css'
-
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      refetchOnWindowFocus: false,
-      retry: false,
-    },
-  },
-})
 
 const App = ({ glossaryId }) => {
   const [initialized, setInitialized] = useState(false)
@@ -27,11 +18,20 @@ const App = ({ glossaryId }) => {
     initApp()
   }, [])
 
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        refetchOnWindowFocus: false,
+        retry: false,
+      },
+    },
+  })
+
   return (
     <QueryClientProvider client={queryClient}>
       <>
         {initialized ? (
-          <Setup glossaryId={glossaryId} />
+          <Wrapper glossaryId={glossaryId} />
         ) : (
           <div>Caricamento...</div>
         )}

@@ -52,24 +52,20 @@ const Api = {
     })
   },
 
-  getConfig: async (glossaryId) => {
-    await get(`/`, { config: true }).then((res) => res.data)
+  getData: async (glossaryId) => {
     await fakeApi(200)
 
-    return {
-      glossaryId,
-      theme: defaultTheme,
-      alphabet: true,
-      search: true,
-      arrowIcon: 'arrow-icon-path',
-    }
-  },
+    const data = await get(`/`, { config: true }).then(() => {
+      return {
+        glossaryId,
+        theme: defaultTheme,
+        alphabet: true,
+        search: true,
+        filters: true,
+      }
+    })
 
-  getGlossary: async (glossaryId) => {
-    await get(`/`, { glossaryId }).then((res) => res.data)
-    await fakeApi(400)
-
-    return glossaryId
+    return data
   },
 }
 

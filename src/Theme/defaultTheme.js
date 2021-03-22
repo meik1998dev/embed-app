@@ -1,8 +1,7 @@
 const defaultTheme = {
-  row: '#ddbea9',
-  text: '#6b705c',
-  primary: '#cb997e',
-  gray: '#ccc',
+  row: '#fff',
+  body: '#2b2b2b',
+  primary: '#519bdb',
   fontMain: "'Noto Sans JP', sans-serif",
 }
 
