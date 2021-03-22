@@ -38,7 +38,10 @@ const Wrapper = ({ glossaryId }) => {
   return (
     <>
       <div className="gl-mb-10 md:gl-flex gl-items-center gl-justify-between">
-        <SelectOrder />
+        <div className="gl-mb-5 md:gl-mb-0">
+          <SelectOrder />
+        </div>
+
         <InputSearch />
       </div>
 
