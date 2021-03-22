@@ -60,7 +60,7 @@ const Api = {
       theme: defaultTheme,
       alphabet: true,
       search: true,
-      filters: true,
+      order: true,
     }
 
     // const data = await get(`/`, { config: true }).then(() => {
@@ -69,7 +69,7 @@ const Api = {
     //     theme: defaultTheme,
     //     alphabet: true,
     //     search: true,
-    //     filters: true,
+    //     order: true,
     //   }
     // })
 

@@ -31,24 +31,26 @@ const Wrapper = ({ glossaryId }) => {
     )
   }
 
-  const { theme } = data
+  const { theme, alphabet, order, search } = data
 
   applyTheme(theme || defaultTheme)
 
   return (
     <>
-      <div className="gl-mb-10 md:gl-flex gl-items-center gl-justify-between">
-        <div className="gl-mb-5 md:gl-mb-0">
-          <SelectOrder />
-        </div>
+      {!order && !search ? null : (
+        <div className="gl-mb-10 md:gl-flex gl-items-center gl-justify-between">
+          <div className="gl-mb-5 md:gl-mb-0">{order && <SelectOrder />}</div>
 
-        <InputSearch />
-      </div>
+          {search && <InputSearch />}
+        </div>
+      )}
 
       <div className="gl-flex">
-        <div className="gl-pl-4 gl-order-2 lg:gl-pl-0 lg:gl-pr-4 lg:gl-order-1 gl-relative">
-          <Alphabet />
-        </div>
+        {alphabet && (
+          <div className="gl-pl-4 gl-order-2 lg:gl-pl-0 lg:gl-pr-4 lg:gl-order-1 gl-relative">
+            <Alphabet />
+          </div>
+        )}
 
         <div className="gl-flex-1 gl-order-1 lg:gl-order-2">
           <Glossary />
