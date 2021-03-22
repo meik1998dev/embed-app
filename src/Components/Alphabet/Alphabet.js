@@ -9,7 +9,7 @@ const AlphabetScroll = () => {
         <div
           key={letter}
           onClick={() => console.log(letter)}
-          className="gl-mb-2 gl-text-xs gl-cursor-pointer">
+          className="gl-mb-2 gl-text-xs gl-cursor-pointer gl-text-gray">
           {letter}
         </div>
       ))}

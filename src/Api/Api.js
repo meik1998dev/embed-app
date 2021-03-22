@@ -55,17 +55,25 @@ const Api = {
   getData: async (glossaryId) => {
     await fakeApi(200)
 
-    const data = await get(`/`, { config: true }).then(() => {
-      return {
-        glossaryId,
-        theme: defaultTheme,
-        alphabet: true,
-        search: true,
-        filters: true,
-      }
-    })
+    return {
+      glossaryId,
+      theme: defaultTheme,
+      alphabet: true,
+      search: true,
+      filters: true,
+    }
 
-    return data
+    // const data = await get(`/`, { config: true }).then(() => {
+    //   return {
+    //     glossaryId,
+    //     theme: defaultTheme,
+    //     alphabet: true,
+    //     search: true,
+    //     filters: true,
+    //   }
+    // })
+
+    // return data
   },
 }
 

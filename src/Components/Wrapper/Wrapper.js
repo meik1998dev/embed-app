@@ -7,6 +7,7 @@ import defaultTheme from 'Theme/defaultTheme'
 import SelectOrder from 'Components/SelectOrder/SelectOrder'
 import InputSearch from 'Components/InputSearch/InputSearch'
 import Alphabet from 'Components/Alphabet/Alphabet'
+import Glossary from 'Components/Glossary/Glossary'
 
 const Wrapper = ({ glossaryId }) => {
   const { isLoading, isError, data, error } = useQuery(
@@ -41,7 +42,15 @@ const Wrapper = ({ glossaryId }) => {
         <InputSearch />
       </div>
 
-      <Alphabet />
+      <div className="gl-flex">
+        <div className="gl-pl-4 gl-order-2 lg:gl-pl-0 lg:gl-pr-4 lg:gl-order-1 gl-relative">
+          <Alphabet />
+        </div>
+
+        <div className="gl-flex-1 gl-order-1 lg:gl-order-2">
+          <Glossary />
+        </div>
+      </div>
     </>
   )
 }
