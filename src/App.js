@@ -1,7 +1,7 @@
 import Api from 'Api/Api'
 import Wrapper from 'Components/Wrapper/Wrapper'
 import PropTypes from 'prop-types'
-import { memo, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
 
@@ -45,4 +45,4 @@ App.propTypes = {
   glossaryId: PropTypes.string.isRequired,
 }
 
-export default memo(App)
+export default App

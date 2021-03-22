@@ -2,7 +2,6 @@ import Api from 'Api/Api'
 import { useQuery } from 'react-query'
 import applyTheme from 'Theme/applyTheme'
 import PropTypes from 'prop-types'
-import { memo } from 'react'
 import defaultTheme from 'Theme/defaultTheme'
 import SelectOrder from 'Components/SelectOrder/SelectOrder'
 import InputSearch from 'Components/InputSearch/InputSearch'
@@ -64,4 +63,4 @@ Wrapper.propTypes = {
   glossaryId: PropTypes.string.isRequired,
 }
 
-export default memo(Wrapper)
+export default Wrapper
