@@ -96,14 +96,12 @@ const Glossary = ({ glossaryId }) => {
         <>
           <div className="gl-mb-5 gl-inline-flex gl-items-center gl-cursor-pointer gl-text-gray">
             <i className="fas fa-chevron-left gl-inline-block gl-mr-2" />
-            <div
-              className="gl-font-main gl-font-semibold"
-              onClick={onClickBack}>
+            <div className="gl-font-main gl-font-bold" onClick={onClickBack}>
               Indietro
             </div>
           </div>
 
-          <div className="gl-font-title gl-text-xl gl-text-primary gl-mb-5">
+          <div className="gl-font-title gl-text-xl gl-text-primary gl-mb-5 gl-font-bold">
             {activeCategory.name}
           </div>
         </>
