@@ -16,6 +16,8 @@ const multipleHtmlPlugins = htmlPageNames.map((name) => {
   })
 })
 
+console.log(globalThis)
+
 module.exports = {
   entry: {
     index: path.resolve(__dirname, 'src/index.js'),
@@ -39,7 +41,10 @@ module.exports = {
     },
   },
   // devtool: 'inline-source-map',
-  mode: process.env.NODE_ENV,
+  mode: 'production',
+  // globalThis.window.location.host.indexOf('localhost') !== -1
+  //   ? 'production'
+  //   : 'development',
   module: {
     rules: [
       {

@@ -6,15 +6,15 @@ import WebFont from 'webfontloader'
 import defaultTheme from 'Theme/defaultTheme'
 import Glossary from 'Components/Glossary/Glossary'
 import InputSearch from 'Components/InputSearch/InputSearch'
-import { useState } from 'react'
-// import InputSearch from 'Components/InputSearch/InputSearch'
-// import Alphabet from 'Components/Alphabet/Alphabet'
+import { useRef, useState } from 'react'
 
 const Wrapper = ({ glossaryId }) => {
   const { isLoading, isError, data, error } = useQuery(
     ['data', glossaryId],
     () => Api.getData(glossaryId)
   )
+
+  const glossaryContainer = useRef(null)
 
   const [searchVal, setSearchVal] = useState('')
 
@@ -52,8 +52,11 @@ const Wrapper = ({ glossaryId }) => {
 
   applyTheme(theme)
 
+  const scrollToTop = () =>
+    glossaryContainer.current.scrollIntoView({ behavior: 'smooth' })
+
   return (
-    <>
+    <div ref={glossaryContainer}>
       {config.search === 0 ? null : (
         <div className="gl-mb-5 md:gl-flex gl-items-center gl-justify-end">
           <InputSearch
@@ -63,22 +66,13 @@ const Wrapper = ({ glossaryId }) => {
         </div>
       )}
 
-      <div className="gl-flex">
-        {/* {alphabet && (
-          <div className="gl-pl-4 gl-order-2 lg:gl-pl-0 lg:gl-pr-4 lg:gl-order-1 gl-relative">
-            <Alphabet />
-          </div>
-        )} */}
-
-        <div className="gl-flex-1 gl-order-1 lg:gl-order-2">
-          <Glossary
-            glossaryId={glossaryId}
-            searchVal={searchVal}
-            resetSearch={() => setSearchVal('')}
-          />
-        </div>
-      </div>
-    </>
+      <Glossary
+        glossaryId={glossaryId}
+        searchVal={searchVal}
+        resetSearch={() => setSearchVal('')}
+        scrollToTop={scrollToTop}
+      />
+    </div>
   )
 }
 
