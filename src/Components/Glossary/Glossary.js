@@ -1,8 +1,9 @@
-import { memo } from 'react'
+/* eslint-disable no-param-reassign */
+import { memo, useCallback, useState } from 'react'
 import PropTypes from 'prop-types'
+import { useQuery } from 'react-query'
 import GlossaryRow from 'Components/GlossaryRow/GlossaryRow'
 import Api from 'Api/Api'
-import { useQuery } from 'react-query'
 
 const Glossary = ({ glossaryId }) => {
   const {
@@ -11,34 +12,105 @@ const Glossary = ({ glossaryId }) => {
     enabled: false,
   })
 
-  console.log(categories)
+  const mapCategories = (items) => {
+    return items.map((item) => {
+      if (!item.glossary) {
+        return mapCategories(item.categories)
+      }
+
+      return item
+    })
+  }
+
+  const parentCategories = categories.map((item) => {
+    const { categories: cats, ...rest } = item
+    return rest
+  })
+
+  const allCategories = [
+    ...parentCategories,
+    ...mapCategories(categories).flat(),
+  ]
+
+  const [activeCategories, setActiveCategories] = useState(parentCategories)
+  const [activeGlossary, setActiveGlossary] = useState(null)
+
+  const onClickRow = useCallback((category) => {
+    const subCategories = allCategories.filter(
+      (item) => item.glossary_category_id === category.id
+    )
+
+    if (!category.glossary) {
+      setActiveCategories(subCategories)
+      setActiveGlossary(null)
+    } else {
+      setActiveGlossary((cat) =>
+        cat !== category.glossary ? category.glossary : null
+      )
+    }
+  }, [])
+
+  const activeCategory = allCategories.filter(
+    (item) => item.id === activeCategories?.[0]?.glossary_category_id
+  )?.[0]
+
+  const onClickBack = () => {
+    const subCategories = allCategories.filter(
+      (item) =>
+        item.glossary_category_id === activeCategory?.glossary_category_id
+    )
+
+    setActiveCategories(subCategories)
+  }
+
+  const renderTree = () =>
+    activeCategories.map((category) => (
+      <div key={category.id} className="gl-mb-3 gl-text-body">
+        <GlossaryRow
+          name={category.name}
+          iconCollapse={config.fa_icon_collapse}
+          iconCollapseIn={config.fa_icon_collapse_in}
+          onClickRow={() => onClickRow(category)}
+          open={
+            activeCategories?.id === category.id ||
+            activeGlossary?.[0]?.glossary_category_id === category.id
+          }
+          content={
+            activeGlossary?.[0]?.glossary_category_id !== category.id
+              ? null
+              : activeGlossary.map((glossary) => (
+                  <div
+                    className="unreset-tw gl-font-main"
+                    key={glossary.id}
+                    dangerouslySetInnerHTML={{ __html: glossary.body }}
+                  />
+                ))
+          }
+        />
+      </div>
+    ))
 
   return (
     <>
-      {categories.map((category) => (
-        <div key={category.id} className="gl-mb-3 gl-text-body">
-          <GlossaryRow
-            name={category.name}
-            iconCollapse={config.fa_icon_collapse}
-            iconCollapseIn={config.fa_icon_collapse}
-          />
-        </div>
-      ))}
+      {!!activeCategory && (
+        <>
+          <div className="gl-mb-5 gl-inline-flex gl-items-center gl-cursor-pointer gl-text-gray">
+            <i className="fas fa-chevron-left gl-inline-block gl-mr-2" />
+            <div
+              className="gl-font-main gl-font-semibold"
+              onClick={onClickBack}>
+              Indietro
+            </div>
+          </div>
+
+          <div className="gl-font-title gl-text-xl gl-text-primary gl-mb-5">
+            {activeCategory.name}
+          </div>
+        </>
+      )}
+
+      {renderTree()}
     </>
-
-    // <>
-    //   <div className="gl-mb-3 gl-text-body">
-    //     <GlossaryRow name="Analisi di impatto sul budget (Budget Impact Analysis – BIA)" />
-    //   </div>
-
-    //   <div className="gl-mb-3 gl-text-body">
-    //     <GlossaryRow
-    //       open
-    //       name="Analisi di impatto sul budget (Budget Impact Analysis – BIA)"
-    //       content="<p>Id non laborum id consequat non aute occaecat. Quis anim cillum eiusmod elit velit consectetur Lorem. Commodo cupidatat dolor culpa laborum ad excepteur exercitation do laboris et. Amet sunt magna aliqua labore aliquip aliqua elit consequat enim reprehenderit enim consequat voluptate cillum. Et aliqua magna anim enim adipisicing et commodo ipsum commodo minim quis proident officia.</p><p>Id non laborum id consequat non aute occaecat. Quis anim cillum eiusmod elit velit consectetur Lorem. Commodo cupidatat dolor culpa laborum ad excepteur exercitation do laboris et. Amet sunt magna aliqua labore aliquip aliqua elit consequat enim reprehenderit enim consequat voluptate cillum. Et aliqua magna anim enim adipisicing et commodo ipsum commodo minim quis proident officia.</p>"
-    //     />
-    //   </div>
-    // </>
   )
 }
 
