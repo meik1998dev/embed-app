@@ -5,7 +5,7 @@ import { useQuery } from 'react-query'
 import GlossaryRow from 'Components/GlossaryRow/GlossaryRow'
 import Api from 'Api/Api'
 
-const Glossary = ({ glossaryId }) => {
+const Glossary = ({ glossaryId, searchVal = '', resetSearch }) => {
   const {
     data: { categories, config },
   } = useQuery(['data', glossaryId], () => Api.getData(glossaryId), {
@@ -35,20 +35,27 @@ const Glossary = ({ glossaryId }) => {
   const [activeCategories, setActiveCategories] = useState(parentCategories)
   const [activeGlossary, setActiveGlossary] = useState(null)
 
-  const onClickRow = useCallback((category) => {
-    const subCategories = allCategories.filter(
-      (item) => item.glossary_category_id === category.id
-    )
-
-    if (!category.glossary) {
-      setActiveCategories(subCategories)
-      setActiveGlossary(null)
-    } else {
-      setActiveGlossary((cat) =>
-        cat !== category.glossary ? category.glossary : null
+  const onClickRow = useCallback(
+    (category) => {
+      const subCategories = allCategories.filter(
+        (item) => item.glossary_category_id === category.id
       )
-    }
-  }, [])
+
+      if (!category.glossary) {
+        setActiveCategories(subCategories)
+        setActiveGlossary(null)
+
+        if (searchVal !== '') {
+          resetSearch()
+        }
+      } else {
+        setActiveGlossary((cat) =>
+          cat !== category.glossary ? category.glossary : null
+        )
+      }
+    },
+    [searchVal]
+  )
 
   const activeCategory = allCategories.filter(
     (item) => item.id === activeCategories?.[0]?.glossary_category_id
@@ -61,11 +68,19 @@ const Glossary = ({ glossaryId }) => {
     )
 
     setActiveCategories(subCategories)
+
+    if (searchVal !== '') {
+      resetSearch()
+    }
   }
 
+  const filteredCatefories = activeCategories.filter(
+    (item) => item.name.toUpperCase().indexOf(searchVal.toUpperCase()) !== -1
+  )
+
   const renderTree = () =>
-    activeCategories.map((category) => (
-      <div key={category.id} className="gl-mb-3 gl-text-body">
+    filteredCatefories.map((category) => (
+      <div key={category.id} className="gl-mb-3 last:gl-mb-0 gl-text-body">
         <GlossaryRow
           name={category.name}
           iconCollapse={config.fa_icon_collapse}
@@ -114,6 +129,8 @@ const Glossary = ({ glossaryId }) => {
 
 Glossary.propTypes = {
   glossaryId: PropTypes.string.isRequired,
+  searchVal: PropTypes.string,
+  resetSearch: PropTypes.func.isRequired,
 }
 
 export default memo(Glossary)

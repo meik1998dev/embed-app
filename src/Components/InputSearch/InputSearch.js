@@ -1,6 +1,7 @@
 import { memo } from 'react'
+import PropTypes from 'prop-types'
 
-const InputSearch = () => {
+const InputSearch = ({ value = '', onChange }) => {
   return (
     <div className="gl-bg-gray-light gl-rounded gl-py-2 gl-px-4 gl-flex gl-items-center">
       <svg
@@ -14,12 +15,18 @@ const InputSearch = () => {
       </svg>
 
       <input
+        value={value}
         placeholder="Cerca"
         className="gl-bg-gray-light gl-pl-2 gl-w-full gl-outline-none gl-text-gray"
-        onChange={(e) => console.log(e.target.value)}
+        onChange={onChange}
       />
     </div>
   )
+}
+
+InputSearch.propTypes = {
+  value: PropTypes.string,
+  onChange: PropTypes.func.isRequired,
 }
 
 export default memo(InputSearch)

@@ -5,7 +5,8 @@ import PropTypes from 'prop-types'
 import WebFont from 'webfontloader'
 import defaultTheme from 'Theme/defaultTheme'
 import Glossary from 'Components/Glossary/Glossary'
-// import SelectOrder from 'Components/SelectOrder/SelectOrder'
+import InputSearch from 'Components/InputSearch/InputSearch'
+import { useState } from 'react'
 // import InputSearch from 'Components/InputSearch/InputSearch'
 // import Alphabet from 'Components/Alphabet/Alphabet'
 
@@ -14,6 +15,8 @@ const Wrapper = ({ glossaryId }) => {
     ['data', glossaryId],
     () => Api.getData(glossaryId)
   )
+
+  const [searchVal, setSearchVal] = useState('')
 
   if (isLoading) {
     return (
@@ -51,13 +54,14 @@ const Wrapper = ({ glossaryId }) => {
 
   return (
     <>
-      {/* {!order && !search ? null : (
-        <div className="gl-mb-10 md:gl-flex gl-items-center gl-justify-between">
-          <div className="gl-mb-5 md:gl-mb-0">{order && <SelectOrder />}</div>
-
-          {search && <InputSearch />}
+      {config.search === 0 ? null : (
+        <div className="gl-mb-5 md:gl-flex gl-items-center gl-justify-end">
+          <InputSearch
+            value={searchVal}
+            onChange={(e) => setSearchVal(e.target.value)}
+          />
         </div>
-      )} */}
+      )}
 
       <div className="gl-flex">
         {/* {alphabet && (
@@ -67,7 +71,11 @@ const Wrapper = ({ glossaryId }) => {
         )} */}
 
         <div className="gl-flex-1 gl-order-1 lg:gl-order-2">
-          <Glossary glossaryId={glossaryId} />
+          <Glossary
+            glossaryId={glossaryId}
+            searchVal={searchVal}
+            resetSearch={() => setSearchVal('')}
+          />
         </div>
       </div>
     </>
