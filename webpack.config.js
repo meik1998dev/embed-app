@@ -1,8 +1,10 @@
+const webpack = require('webpack')
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const { HotModuleReplacementPlugin } = require('webpack')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const dotenv = require('dotenv')
 
 const htmlPageNames = ['embed']
 
@@ -32,6 +34,8 @@ module.exports = {
     extensions: ['.js', '.jsx', '.json'],
     alias: {
       Api: path.resolve(__dirname, './src/Api'),
+      Components: path.resolve(__dirname, './src/Components'),
+      Theme: path.resolve(__dirname, './src/Theme'),
     },
   },
   devtool: 'inline-source-map',
@@ -64,6 +68,9 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: 'index.scss',
       chunkFilename: '[id].css',
+    }),
+    new webpack.DefinePlugin({
+      'process.env': JSON.stringify(dotenv.config().parsed),
     }),
   ].concat(multipleHtmlPlugins),
   devServer: {

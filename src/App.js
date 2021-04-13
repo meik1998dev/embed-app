@@ -1,22 +1,10 @@
-import Api from 'Api/Api'
-import Wrapper from 'Components/Wrapper/Wrapper'
 import PropTypes from 'prop-types'
-import { useEffect, useState } from 'react'
+import ScriptTag from 'react-script-tag'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
+import Wrapper from 'Components/Wrapper/Wrapper'
 
 const App = ({ glossaryId }) => {
-  const [initialized, setInitialized] = useState(false)
-
-  useEffect(() => {
-    const initApp = async () => {
-      await Api.init({ baseURL: '' })
-      setInitialized(true)
-    }
-
-    initApp()
-  }, [])
-
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
@@ -28,13 +16,18 @@ const App = ({ glossaryId }) => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <>
-        {initialized ? (
-          <Wrapper glossaryId={glossaryId} />
-        ) : (
-          <div>Caricamento...</div>
-        )}
-      </>
+      <link
+        rel="stylesheet"
+        type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      />
+
+      <ScriptTag
+        type="text/javascript"
+        src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"
+      />
+
+      <Wrapper glossaryId={glossaryId} />
 
       <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
     </QueryClientProvider>

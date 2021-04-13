@@ -53,27 +53,8 @@ const Api = {
   },
 
   getData: async (glossaryId) => {
-    await fakeApi(200)
-
-    return {
-      glossaryId,
-      theme: defaultTheme,
-      alphabet: true,
-      search: true,
-      order: true,
-    }
-
-    // const data = await get(`/`, { config: true }).then(() => {
-    //   return {
-    //     glossaryId,
-    //     theme: defaultTheme,
-    //     alphabet: true,
-    //     search: true,
-    //     order: true,
-    //   }
-    // })
-
-    // return data
+    const resData = await get(`/app/${glossaryId}`)?.then((res) => res.data)
+    return resData
   },
 }
 

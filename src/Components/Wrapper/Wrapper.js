@@ -2,11 +2,12 @@ import Api from 'Api/Api'
 import { useQuery } from 'react-query'
 import applyTheme from 'Theme/applyTheme'
 import PropTypes from 'prop-types'
+import WebFont from 'webfontloader'
 import defaultTheme from 'Theme/defaultTheme'
-import SelectOrder from 'Components/SelectOrder/SelectOrder'
-import InputSearch from 'Components/InputSearch/InputSearch'
-import Alphabet from 'Components/Alphabet/Alphabet'
 import Glossary from 'Components/Glossary/Glossary'
+// import SelectOrder from 'Components/SelectOrder/SelectOrder'
+// import InputSearch from 'Components/InputSearch/InputSearch'
+// import Alphabet from 'Components/Alphabet/Alphabet'
 
 const Wrapper = ({ glossaryId }) => {
   const { isLoading, isError, data, error } = useQuery(
@@ -30,29 +31,43 @@ const Wrapper = ({ glossaryId }) => {
     )
   }
 
-  const { theme, alphabet, order, search } = data
+  const { config } = data
 
-  applyTheme(theme || defaultTheme)
+  WebFont.load({
+    google: {
+      families: [config.main_font, config.title_font],
+    },
+  })
+
+  const theme = {
+    ...defaultTheme,
+    fontMain: config.main_font,
+    fontTitle: config.title_font,
+    primaryColor: config.primary_color,
+    secondaryColor: config.secondary_color,
+  }
+
+  applyTheme(theme)
 
   return (
     <>
-      {!order && !search ? null : (
+      {/* {!order && !search ? null : (
         <div className="gl-mb-10 md:gl-flex gl-items-center gl-justify-between">
           <div className="gl-mb-5 md:gl-mb-0">{order && <SelectOrder />}</div>
 
           {search && <InputSearch />}
         </div>
-      )}
+      )} */}
 
       <div className="gl-flex">
-        {alphabet && (
+        {/* {alphabet && (
           <div className="gl-pl-4 gl-order-2 lg:gl-pl-0 lg:gl-pr-4 lg:gl-order-1 gl-relative">
             <Alphabet />
           </div>
-        )}
+        )} */}
 
         <div className="gl-flex-1 gl-order-1 lg:gl-order-2">
-          <Glossary />
+          <Glossary glossaryId={glossaryId} />
         </div>
       </div>
     </>
