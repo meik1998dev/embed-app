@@ -16,8 +16,6 @@ const multipleHtmlPlugins = htmlPageNames.map((name) => {
   })
 })
 
-console.log(globalThis)
-
 module.exports = {
   entry: {
     index: path.resolve(__dirname, 'src/index.js'),
