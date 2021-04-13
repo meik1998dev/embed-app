@@ -38,8 +38,8 @@ module.exports = {
       Theme: path.resolve(__dirname, './src/Theme'),
     },
   },
-  devtool: 'inline-source-map',
-  mode: 'development',
+  // devtool: 'inline-source-map',
+  mode: process.env.NODE_ENV,
   module: {
     rules: [
       {
