@@ -80,7 +80,7 @@ const Glossary = ({ glossaryId }) => {
               ? null
               : activeGlossary.map((glossary) => (
                   <div
-                    className="unreset-tw gl-font-main"
+                    className="unreset-tw gl-font-main gl-mb-2 last:gl-mb-0"
                     key={glossary.id}
                     dangerouslySetInnerHTML={{ __html: glossary.body }}
                   />
