@@ -51,9 +51,27 @@ const Glossary = ({ glossaryId, searchVal = '', resetSearch, scrollToTop }) => {
 
   const onClickRow = useCallback(
     (category) => {
-      const subCategories = categoriesObj[category.id]?.categories
+      if (
+        category?.categories?.length <= 0 &&
+        category?.glossary?.length <= 0
+      ) {
+        setActiveGlossary((cat) =>
+          cat
+            ? null
+            : [
+                {
+                  id: 'no-data',
+                  body: `<p>Non ci sono dati</p>`,
+                  glossary_category_id: category.id,
+                },
+              ]
+        )
+        return
+      }
 
       if (!category.glossary || category?.glossary?.length <= 0) {
+        const subCategories = categoriesObj[category.id]?.categories
+
         setActiveCategories(subCategories)
         setActiveGlossary(null)
         scrollToTop()
