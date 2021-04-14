@@ -5,7 +5,8 @@
   "license": "MIT",
   "scripts": {
     "dev": "webpack serve",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "build-netlify": "yarn build && echo '/*  /index.html  200' | cat >dist/_redirects"
   },
   "dependencies": {
     "axios": "^0.21.1",
