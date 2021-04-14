@@ -2,10 +2,10 @@
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import { useQuery } from 'react-query'
+import uniq from 'lodash.uniq'
 import GlossaryRow from 'Components/GlossaryRow/GlossaryRow'
 import Api from 'Api/Api'
 import sortByName from 'Components/Utils/sortByName'
-import uniq from 'lodash.uniq'
 import Alphabet from 'Components/Alphabet/Alphabet'
 
 const Glossary = ({ glossaryId, searchVal = '', resetSearch, scrollToTop }) => {
@@ -15,28 +15,32 @@ const Glossary = ({ glossaryId, searchVal = '', resetSearch, scrollToTop }) => {
     enabled: false,
   })
 
+  const categoriesObj = {}
+
   const mapCategories = (items) => {
-    return items.map((item) => {
-      if (!item.glossary) {
-        return mapCategories(item.categories)
+    items.forEach((item) => {
+      if (!item.glossary || item?.glossary?.length <= 0) {
+        categoriesObj[item.id] = item
+        mapCategories(item.categories)
       }
 
-      return item
+      categoriesObj[item.id] = item
     })
   }
 
-  const parentCategories = categories.map((item) => {
-    const { categories: cats, ...rest } = item
-    return rest
-  })
+  mapCategories(categories)
 
-  const allCategories = [
-    ...parentCategories,
-    ...mapCategories(categories).flat(),
-  ]
+  const parentCategories = Object.values(categoriesObj).filter(
+    (item) => !item.glossary_category_id
+  )
+
+  const childrenCategories = Object.values(categoriesObj).filter(
+    (item) => item.glossary_category_id
+  )
+
+  const allCategories = [...parentCategories, ...childrenCategories]
 
   const startsWithLetter = useRef(null)
-
   const [activeCategories, setActiveCategories] = useState(parentCategories)
   const [activeGlossary, setActiveGlossary] = useState(null)
   const [activeLetter, setActiveLetter] = useState(null)
@@ -47,11 +51,9 @@ const Glossary = ({ glossaryId, searchVal = '', resetSearch, scrollToTop }) => {
 
   const onClickRow = useCallback(
     (category) => {
-      const subCategories = allCategories.filter(
-        (item) => item.glossary_category_id === category.id
-      )
+      const subCategories = categoriesObj[category.id]?.categories
 
-      if (!category.glossary) {
+      if (!category.glossary || category?.glossary?.length <= 0) {
         setActiveCategories(subCategories)
         setActiveGlossary(null)
         scrollToTop()

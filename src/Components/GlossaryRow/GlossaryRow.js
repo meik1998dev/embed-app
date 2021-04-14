@@ -35,7 +35,7 @@ const GlossaryRow = ({
 }
 
 GlossaryRow.propTypes = {
-  id: PropTypes.string.isRequired,
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   name: PropTypes.string.isRequired,
   open: PropTypes.bool,
   content: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),

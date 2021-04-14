@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 const allLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
 
-const Alphabet = ({ letters, activeLetter, handleClick }) => {
+const Alphabet = ({ letters, activeLetter = null, handleClick }) => {
   return (
     <div className="gl-inline-flex gl-flex-col gl-items-center gl-overflow-auto gl-sticky gl-top-0">
       {allLetters.map((letter) => (
@@ -26,7 +26,7 @@ const Alphabet = ({ letters, activeLetter, handleClick }) => {
 
 Alphabet.propTypes = {
   letters: PropTypes.arrayOf(PropTypes.string).isRequired,
-  activeLetter: PropTypes.string.isRequired,
+  activeLetter: PropTypes.string,
   handleClick: PropTypes.func.isRequired,
 }
 
