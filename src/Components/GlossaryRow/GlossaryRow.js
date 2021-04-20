@@ -25,7 +25,7 @@ const GlossaryRow = ({
         </div>
 
         <div className="gl-bg-primary gl-rounded-full gl-w-7 gl-h-7 gl-flex gl-items-center gl-justify-center gl-py-3 gl-text-white">
-          <i className={`${open ? iconCollapseIn : iconCollapse}`} />
+          <i className={`${open ? iconCollapseIn : iconCollapse} gl-fa`} />
         </div>
       </div>
 

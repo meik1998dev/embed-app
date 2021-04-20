@@ -177,7 +177,7 @@ const Glossary = ({ glossaryId, searchVal = '', resetSearch, scrollToTop }) => {
         {!!activeCategory && (
           <>
             <div className="gl-mb-5 gl-inline-flex gl-items-center gl-cursor-pointer gl-text-gray">
-              <i className="fas fa-chevron-left gl-inline-block gl-mr-2" />
+              <i className="fas fa-chevron-left gl-inline-block gl-mr-2 gl-fa" />
               <div className="gl-font-main gl-font-bold" onClick={onClickBack}>
                 Indietro
               </div>

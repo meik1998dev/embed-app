@@ -38,7 +38,7 @@ const Wrapper = ({ glossaryId }) => {
 
   WebFont.load({
     google: {
-      families: [config.main_font, config.title_font],
+      families: [`${config.main_font}:400,700`, `${config.title_font}:400,700`],
     },
   })
 
