@@ -1,7 +1,7 @@
 import { memo } from 'react'
 import PropTypes from 'prop-types'
 
-const InputSearch = ({ value = '', onChange }) => {
+const InputSearch = ({ onChange }) => {
   return (
     <div className="gl-bg-gray-light gl-rounded gl-py-2 gl-px-4 gl-flex gl-items-center">
       <svg
@@ -15,7 +15,6 @@ const InputSearch = ({ value = '', onChange }) => {
       </svg>
 
       <input
-        value={value}
         placeholder="Cerca"
         className="gl-bg-gray-light gl-pl-2 gl-w-full gl-outline-none gl-text-gray"
         onChange={onChange}
@@ -25,7 +24,6 @@ const InputSearch = ({ value = '', onChange }) => {
 }
 
 InputSearch.propTypes = {
-  value: PropTypes.string,
   onChange: PropTypes.func.isRequired,
 }
 

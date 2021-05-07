@@ -5,18 +5,12 @@ import PropTypes from 'prop-types'
 import WebFont from 'webfontloader'
 import defaultTheme from 'Theme/defaultTheme'
 import Glossary from 'Components/Glossary/Glossary'
-import InputSearch from 'Components/InputSearch/InputSearch'
-import { useRef, useState } from 'react'
 
 const Wrapper = ({ glossaryId }) => {
   const { isLoading, isError, data, error } = useQuery(
     ['data', glossaryId],
     () => Api.getData(glossaryId)
   )
-
-  const glossaryContainer = useRef(null)
-
-  const [searchVal, setSearchVal] = useState('')
 
   if (isLoading) {
     return (
@@ -52,28 +46,7 @@ const Wrapper = ({ glossaryId }) => {
 
   applyTheme(theme)
 
-  const scrollToTop = () =>
-    glossaryContainer.current.scrollIntoView({ behavior: 'smooth' })
-
-  return (
-    <div ref={glossaryContainer}>
-      {config.search === 0 ? null : (
-        <div className="gl-mb-5 md:gl-flex gl-items-center gl-justify-end">
-          <InputSearch
-            value={searchVal}
-            onChange={(e) => setSearchVal(e.target.value)}
-          />
-        </div>
-      )}
-
-      <Glossary
-        glossaryId={glossaryId}
-        searchVal={searchVal}
-        resetSearch={() => setSearchVal('')}
-        scrollToTop={scrollToTop}
-      />
-    </div>
-  )
+  return <Glossary glossaryId={glossaryId} />
 }
 
 Wrapper.propTypes = {

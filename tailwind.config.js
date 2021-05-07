@@ -28,10 +28,5 @@ module.exports = {
       title: 'var(--gl-font-title)',
     },
   },
-  variants: {
-    extend: {
-      margin: ['last'],
-    },
-  },
   plugins: [],
 }
