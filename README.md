@@ -1,29 +1,14 @@
-# README #
+# Glossary
+**Node version: 14.15.4**<br />
+Please use the required node version to install packages or run the application. Other version could work too but could also have problems with current packages versions.
 
-This README would normally document whatever steps are necessary to get your application up and running.
+**Run the project:**<br />
+`yarn dev`
 
-### What is this repository for? ###
+**Tech:**<br />
+- **React** version 17.0.1<br />
+- Style: **Tailwind**<br />
+- Bundler: **Webpack**<br />
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
-
-### How do I get set up? ###
-
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
-
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
+## Notes<br />
+Glossary fetches data from backoffice API. Each glossary needs a **glossary ID** and **html element id** in order to work.
