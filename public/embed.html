@@ -12,16 +12,14 @@
     />
   </head>
   <body>
-    <div id="glossary-app"></div>
+    <div id="react-app"></div>
 
     <script>
       function onLoadEmbed() {
+        console.log('xx');
         const glossary = new Glossary.init();
 
-        glossary.start({
-          elementId: "glossary-app",
-          glossaryId: "GLOSSARY_ID",
-        });
+        glossary.start();
       }
     </script>
 

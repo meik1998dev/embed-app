@@ -9,19 +9,23 @@
     "build-netlify": "yarn build && echo '/*  /index.html  200' | cat >dist/_redirects"
   },
   "dependencies": {
+    "@chakra-ui/react": "^2.2.1",
+    "@emotion/react": "^11.9.3",
+    "@emotion/styled": "^11.9.3",
     "axios": "^0.21.1",
     "dotenv": "^8.2.0",
+    "framer-motion": "^6.3.16",
     "lodash.flatten": "^4.4.0",
     "lodash.keyby": "^4.6.0",
     "lodash.uniq": "^4.5.0",
     "lodash.values": "^4.3.0",
     "prop-types": "^15.7.2",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
+    "react": "^0.0.0-experimental-4cd788aef-20220630",
+    "react-dom": "^0.0.0-experimental-4cd788aef-20220630",
     "react-query": "^3.13.0",
     "react-script-tag": "^1.1.2",
     "smoothscroll-polyfill": "^0.4.4",
-    "tailwindcss": "^2.0.4",
+    "tailwindcss": "^3.0.0",
     "webfontloader": "^1.6.28"
   },
   "devDependencies": {

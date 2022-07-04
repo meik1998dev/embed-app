@@ -1,31 +1,14 @@
+/** @type {import('tailwindcss').Config} */
 module.exports = {
-  prefix: 'gl-',
-  purge: {
-    content: ['./src/**/*.html', './src/**/*.js'],
-    options: {
-      keyframes: true,
-    },
-  },
-  darkMode: false,
+  content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
-    extend: {},
-    fill: {
-      current: 'currentColor',
-    },
-    colors: {
-      white: '#fff',
-      black: '#000',
-      gray: '#98a9bc',
-      'gray-light': '#e8ecef',
-      primary: 'var(--gl-color-primary)',
-      secondary: 'var(--gl-color-secondary)',
-    },
-    backgroundColor: (theme) => ({
-      ...theme('colors'),
-    }),
-    fontFamily: {
-      main: 'var(--gl-font-main)',
-      title: 'var(--gl-font-title)',
+    extend: {
+      colors: {
+        blue: '#2154A7',
+        orange: '#F48727',
+        gray: '#EFEFEF',
+        green: '#57CC2D',
+      },
     },
   },
   plugins: [],
