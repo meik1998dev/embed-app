@@ -24,6 +24,7 @@
     "react-dom": "^0.0.0-experimental-4cd788aef-20220630",
     "react-query": "^3.13.0",
     "react-script-tag": "^1.1.2",
+    "recoil": "^0.7.4",
     "smoothscroll-polyfill": "^0.4.4",
     "tailwindcss": "^3.0.0",
     "webfontloader": "^1.6.28"

@@ -1,11 +1,14 @@
 import { ChakraProvider } from '@chakra-ui/react'
+import { RecoilRoot } from 'recoil'
 import { Estimate } from './Components/EstimateStep/Estimate'
 
 function App() {
   return (
     <div className="App">
       <ChakraProvider>
-        <Estimate />
+        <RecoilRoot>
+          <Estimate />
+        </RecoilRoot>
       </ChakraProvider>
     </div>
   )

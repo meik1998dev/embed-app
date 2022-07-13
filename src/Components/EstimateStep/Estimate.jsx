@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { Button } from '@chakra-ui/react'
+import { useRecoilState } from 'recoil'
+import { unitCostAtom } from 'recoil/atoms'
 import { DeliveryMenu } from '../Menus/DeliveryMenu'
 import { PackagingMenu } from '../Menus/PackagingMenu'
 import { PrintsMenu } from '../Menus/PrintsMenu'
@@ -9,6 +11,7 @@ import { Steps } from '../Steps'
 import { EnquireForm } from '../EnquireForm'
 
 export const Estimate = () => {
+  const [unutCost] = useRecoilState(unitCostAtom)
   const [selectedStep, setselectedStep] = useState(1)
   return (
     <div>
@@ -86,7 +89,7 @@ export const Estimate = () => {
               <div className="flex justify-between">
                 <span>Unit Cost</span>
                 <span>
-                  <b>€ 3.00</b>
+                  <b>{unutCost}</b>
                 </span>
               </div>
               <div className="flex justify-between">
