@@ -7,7 +7,7 @@ import { CollapsableMenu } from '../CollapsableMenu'
 
 export const QuantityMenu = ({ selectedStep }) => {
   const [, setUnitCost] = useRecoilState(unitCostAtom)
-  const [quantity, setQuentity] = useState(6)
+  const [quantity, setQuentity] = useState(0)
 
   const handleSetQuantity = (e) => {
     let { value } = e.target

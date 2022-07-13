@@ -89,7 +89,7 @@ export const Estimate = () => {
               <div className="flex justify-between">
                 <span>Unit Cost</span>
                 <span>
-                  <b>{unutCost}</b>
+                  <b>€ {unutCost}</b>
                 </span>
               </div>
               <div className="flex justify-between">
