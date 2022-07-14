@@ -60,7 +60,7 @@ export const Estimate = () => {
     Number(packaging) +
     format(printFront)
 
-  const vat = Number(((tshirtCost * quantity * 1.22) / 100).toFixed(5))
+  const vat = Number(((tshirtCost * quantity * 22) / 100).toFixed(2))
   const total = vat + tshirtCost * quantity + format(delevery)
   return (
     <div>
