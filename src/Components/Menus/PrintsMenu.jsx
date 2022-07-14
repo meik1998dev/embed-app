@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Radio, RadioGroup, Stack } from '@chakra-ui/react'
 import {
   FrontandBackpricesTable,
@@ -28,7 +28,6 @@ export const PrintsMenu = ({ selectedStep }) => {
   const [printFront, setPrintFront] = useRecoilState(printFrontAtom)
   const [printBack, setPrintBack] = useRecoilState(printBackAtom)
   const [quantityRange] = useRecoilState(quantityRangeAtom)
-
   return (
     <CollapsableMenu title="PRINTS">
       {selectedStep === 2 ? (

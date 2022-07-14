@@ -2,18 +2,40 @@
 /* eslint-disable no-fallthrough */
 import React from 'react'
 import { useRecoilState } from 'recoil'
-import { quantityAtom, quantityRangeAtom, unitCostAtom } from 'recoil/atoms'
+import {
+  quantityAtom,
+  quantityRangeAtom,
+  unitCostAtom,
+  internalNeckAtom,
+  leftSlaveAtom,
+  printBackAtom,
+  printFrontAtom,
+  rightSlaveAtom,
+} from 'recoil/atoms'
 import { CollapsableMenu } from '../CollapsableMenu'
 
 export const QuantityMenu = ({ selectedStep }) => {
   const [, setUnitCost] = useRecoilState(unitCostAtom)
   const [quantity, setQuentity] = useRecoilState(quantityAtom)
   const [, setQuentityRange] = useRecoilState(quantityRangeAtom)
+  const [, setrightSlave] = useRecoilState(rightSlaveAtom)
+  const [, setleftSlave] = useRecoilState(leftSlaveAtom)
+  const [, setinternalNeck] = useRecoilState(internalNeckAtom)
+  const [, setPrintFront] = useRecoilState(printFrontAtom)
+  const [, setPrintBack] = useRecoilState(printBackAtom)
 
   const handleSetQuantity = (e) => {
     let { value } = e.target
     value = parseInt(value)
     setQuentity(value)
+
+    if (value < 10) {
+      setrightSlave(0)
+      setleftSlave(0)
+      setinternalNeck(0)
+      setPrintFront(0)
+      setPrintBack(0)
+    }
 
     if (value === 1) {
       setUnitCost(19.9)

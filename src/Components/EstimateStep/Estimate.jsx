@@ -97,8 +97,8 @@ export const Estimate = () => {
               </div>
               <h2>Please select a quantity</h2>
               <QuantityMenu selectedStep={selectedStep} />
-              {quantity > 10 && <PrintsMenu selectedStep={selectedStep} />}
-              {quantity > 10 && <DeliveryMenu selectedStep={selectedStep} />}
+              {quantity >= 10 && <PrintsMenu selectedStep={selectedStep} />}
+              {quantity >= 10 && <DeliveryMenu selectedStep={selectedStep} />}
               {quantity > 0 && <PackagingMenu selectedStep={selectedStep} />}
             </>
           ) : (
