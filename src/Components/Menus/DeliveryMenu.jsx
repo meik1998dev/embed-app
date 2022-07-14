@@ -1,52 +1,57 @@
-import React, { useState } from 'react';
-import { CollapsableMenu } from '../CollapsableMenu';
-import { Radio, RadioGroup, Stack } from '@chakra-ui/react';
+/* eslint-disable no-nested-ternary */
+import React from 'react'
+import { Radio, RadioGroup, Stack } from '@chakra-ui/react'
+import { DeleverypricesTable } from 'pricesTable'
+import { useRecoilState } from 'recoil'
+import { deleveryAtom, quantityRangeAtom } from 'recoil/atoms'
+import { CollapsableMenu } from '../CollapsableMenu'
 
 export const DeliveryMenu = ({ selectedStep }) => {
-   const [value, setValue] = useState('1');
+  const [value, setValue] = useRecoilState(deleveryAtom)
+  const [quantityRange] = useRecoilState(quantityRangeAtom)
 
-   return (
-      <CollapsableMenu title={'DELIVERY'}>
-         {selectedStep === 2 ? (
-            <div className='flex justify-between'>
-               <b className='text-blue text-sm'>Delivery time</b>{' '}
-               <span> Lorem ipsum dolor sit amet, consetetur sadipscin</span>
-            </div>
-         ) : (
-            <div className='flex flex-col gap-2 '>
-               <p className='italic text-sm'>
-                  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                  diam
-               </p>
-               <div className='flex gap-6 py-4'>
-                  <b className='text-blue text-sm w-1/5'>Delivery time</b>{' '}
-                  <RadioGroup
-                     w={'full'}
-                     colorScheme='green'
-                     onChange={setValue}
-                     value={value}>
-                     <Stack direction='column'>
-                        <div className='border-b-[1px]  border-[#c3c3c3]'>
-                           <Radio w={'full'} size={'sm'} value='1'>
-                              <div className='justify-between flex'>
-                                 <span> 20 working days</span>{' '}
-                                 <span>+ € 0.00</span>
-                              </div>
-                           </Radio>
+  return (
+    <CollapsableMenu title="DELIVERY">
+      {selectedStep === 2 ? (
+        <div className="flex justify-between">
+          <b className="text-blue text-sm">Delivery time</b>{' '}
+          <span> Lorem ipsum dolor sit amet, consetetur sadipscin</span>
+        </div>
+      ) : (
+        <div className="flex flex-col gap-2 ">
+          <p className="italic text-sm">
+            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+          </p>
+          <div className="flex gap-6 py-4">
+            <b className="text-blue text-sm w-1/5">Delivery time</b>{' '}
+            <RadioGroup
+              w="full"
+              colorScheme="green"
+              onChange={setValue}
+              value={value}>
+              <Stack direction="column">
+                {DeleverypricesTable[quantityRange].map((item, i) => {
+                  return (
+                    <div className="border-b-[1px]  border-[#c3c3c3]">
+                      <Radio w="full" size="sm" value={`${String(item)}-${i}`}>
+                        <div className="justify-between flex">
+                          <span>
+                            {i === 0 && 7}
+                            {i === 1 && 10}
+                            {i === 2 && 14}
+                            {i === 3 && 20} working days
+                          </span>
+                          <span>+ € {item}</span>
                         </div>
-                        <div className='border-b-[1px]  border-[#c3c3c3]'>
-                           <Radio w={'full'} size={'sm'} value='2'>
-                              <div className='justify-between flex'>
-                                 <span>20 working days</span>{' '}
-                                 <span>+ € 0.00</span>
-                              </div>
-                           </Radio>
-                        </div>
-                     </Stack>
-                  </RadioGroup>
-               </div>
-            </div>
-         )}
-      </CollapsableMenu>
-   );
-};
+                      </Radio>
+                    </div>
+                  )
+                })}
+              </Stack>
+            </RadioGroup>
+          </div>
+        </div>
+      )}
+    </CollapsableMenu>
+  )
+}

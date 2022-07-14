@@ -2,7 +2,17 @@
 import React, { useState } from 'react'
 import { Button } from '@chakra-ui/react'
 import { useRecoilState } from 'recoil'
-import { quantityAtom, unitCostAtom } from 'recoil/atoms'
+import {
+  deleveryAtom,
+  internalNeckAtom,
+  leftSlaveAtom,
+  packagingAtom,
+  printBackAtom,
+  printFrontAtom,
+  quantityAtom,
+  rightSlaveAtom,
+  unitCostAtom,
+} from 'recoil/atoms'
 import { DeliveryMenu } from '../Menus/DeliveryMenu'
 import { PackagingMenu } from '../Menus/PackagingMenu'
 import { PrintsMenu } from '../Menus/PrintsMenu'
@@ -13,12 +23,45 @@ import { EnquireForm } from '../EnquireForm'
 
 export const Estimate = () => {
   const [unutCost] = useRecoilState(unitCostAtom)
+  const [rightSlave] = useRecoilState(rightSlaveAtom)
+  const [leftSlave] = useRecoilState(leftSlaveAtom)
+  const [internalNeck] = useRecoilState(internalNeckAtom)
+  const [printFront] = useRecoilState(printFrontAtom)
+  const [printBack] = useRecoilState(printBackAtom)
+  const [packaging] = useRecoilState(packagingAtom)
+  const [delevery] = useRecoilState(deleveryAtom)
+
   const [quantity] = useRecoilState(quantityAtom)
+
+  const format = (item) => {
+    if (item === 0) return 0
+
+    return Number(item.split('-')[0])
+  }
+
+  const getDeleverytext = (item) => {
+    if (item === 0) return '20 Working days'
+
+    const index = Number(item.split('-')[1])
+    if (index === 0) return '7 Working days'
+    if (index === 1) return '10 Working days'
+    if (index === 2) return '14 Working days'
+    if (index === 3) return '20 Working days'
+  }
 
   const [selectedStep, setselectedStep] = useState(1)
 
-  const vat = Number(((unutCost * quantity * 1.22) / 100).toFixed(5))
-  const total = vat + unutCost * quantity
+  const tshirtCost =
+    unutCost +
+    format(rightSlave) +
+    format(leftSlave) +
+    format(internalNeck) +
+    format(printBack) +
+    Number(packaging) +
+    format(printFront)
+
+  const vat = Number(((tshirtCost * quantity * 1.22) / 100).toFixed(5))
+  const total = vat + tshirtCost * quantity + format(delevery)
   return (
     <div>
       <Steps selectedStep={selectedStep} />
@@ -86,13 +129,15 @@ export const Estimate = () => {
               <div className="flex justify-between">
                 <span>Delivery date</span>
                 <span>
-                  <b>30 Aug 2022</b>
+                  <b>{getDeleverytext(delevery)}</b>
                 </span>
               </div>
               <div className="flex justify-between">
                 <span>Shipping</span>
                 <span>
-                  <b>Free</b>
+                  <b>
+                    {format(delevery) === 0 ? 'Free' : `€ ${format(delevery)}`}
+                  </b>
                 </span>
               </div>
             </div>
@@ -100,13 +145,13 @@ export const Estimate = () => {
               <div className="flex justify-between">
                 <span>Unit Cost</span>
                 <span>
-                  <b>€ {unutCost}</b>
+                  <b>€ {tshirtCost}</b>
                 </span>
               </div>
               <div className="flex justify-between">
                 <span>Net total</span>
                 <span>
-                  <b>€ {unutCost * quantity}</b>
+                  <b>€ {tshirtCost * quantity}</b>
                 </span>
               </div>
               <div className="flex justify-between">

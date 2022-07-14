@@ -5,7 +5,14 @@ import {
   neckpricesTable,
   sleevepricesTable,
 } from 'pricesTable'
-import { quantityRangeAtom } from 'recoil/atoms'
+import {
+  internalNeckAtom,
+  leftSlaveAtom,
+  printBackAtom,
+  printFrontAtom,
+  quantityRangeAtom,
+  rightSlaveAtom,
+} from 'recoil/atoms'
 import { useRecoilState } from 'recoil'
 import { CollapsableMenu } from '../CollapsableMenu'
 import front from '../../Assets/front.png'
@@ -14,11 +21,11 @@ import neck from '../../Assets/neck.png'
 import left from '../../Assets/left.png'
 
 export const PrintsMenu = ({ selectedStep }) => {
-  const [rightSlave, setrightSlave] = useState('1')
-  const [leftSlave, setleftSlave] = useState('1')
-  const [internalNeck, setinternalNeck] = useState('1')
-  const [printFront, setPrintFront] = useState(0)
-  const [printBack, setPrintBack] = useState(0)
+  const [rightSlave, setrightSlave] = useRecoilState(rightSlaveAtom)
+  const [leftSlave, setleftSlave] = useRecoilState(leftSlaveAtom)
+  const [internalNeck, setinternalNeck] = useRecoilState(internalNeckAtom)
+  const [printFront, setPrintFront] = useRecoilState(printFrontAtom)
+  const [printBack, setPrintBack] = useRecoilState(printBackAtom)
   const [quantityRange] = useRecoilState(quantityRangeAtom)
 
   return (
