@@ -1,5 +1,12 @@
 import React, { useState } from 'react'
 import { Radio, RadioGroup, Stack } from '@chakra-ui/react'
+import {
+  FrontandBackpricesTable,
+  neckpricesTable,
+  sleevepricesTable,
+} from 'pricesTable'
+import { quantityRangeAtom } from 'recoil/atoms'
+import { useRecoilState } from 'recoil'
 import { CollapsableMenu } from '../CollapsableMenu'
 import front from '../../Assets/front.png'
 import right from '../../Assets/right.png'
@@ -10,7 +17,10 @@ export const PrintsMenu = ({ selectedStep }) => {
   const [rightSlave, setrightSlave] = useState('1')
   const [leftSlave, setleftSlave] = useState('1')
   const [internalNeck, setinternalNeck] = useState('1')
-  const [printFront, setPrintFront] = useState('1')
+  const [printFront, setPrintFront] = useState(0)
+  const [printBack, setPrintBack] = useState(0)
+  const [quantityRange] = useRecoilState(quantityRangeAtom)
+
   return (
     <CollapsableMenu title="PRINTS">
       {selectedStep === 2 ? (
@@ -52,60 +62,72 @@ export const PrintsMenu = ({ selectedStep }) => {
                 value={printFront}>
                 <Stack direction="column">
                   <div className="border-b-[1px]  border-[#c3c3c3]">
-                    <Radio w="full" size="sm" value="0">
+                    <Radio w="full" size="sm" value={0}>
                       <div className="justify-between flex">
                         <span> none</span> <span>+ € 0.00</span>
                       </div>
                     </Radio>
                   </div>
+                  {FrontandBackpricesTable[quantityRange].map((item, i) => {
+                    return (
+                      <div className="border-b-[1px]  border-[#c3c3c3]">
+                        <Radio
+                          w="full"
+                          size="sm"
+                          value={`${String(item)}-${i}`}>
+                          <div className="justify-between flex">
+                            <span>
+                              Screen Printing - {i + 1 < 6 ? i + 1 : 'full'}{' '}
+                              color
+                            </span>
+                            <span>+ € {item}</span>
+                          </div>
+                        </Radio>
+                      </div>
+                    )
+                  })}
+                </Stack>
+              </RadioGroup>
+            </div>
+          </div>
+          <div className="flex flex-col gap-2 border-b-[1px] border-black">
+            <b className="text-blue text-sm">Back</b>{' '}
+            <p className="italic text-sm">
+              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+            </p>
+            <div className="flex gap-6 py-4 items-center">
+              <img src={front} alt="front" />
+              <RadioGroup
+                w="full"
+                colorScheme="green"
+                onChange={setPrintBack}
+                value={printBack}>
+                <Stack direction="column">
                   <div className="border-b-[1px]  border-[#c3c3c3]">
-                    <Radio w="full" size="sm" value="1">
+                    <Radio w="full" size="sm" value={0}>
                       <div className="justify-between flex">
-                        <span> Screen Printing - 1 color</span>{' '}
-                        <span>+ € 0.00</span>
+                        <span> none</span> <span>+ € 0.00</span>
                       </div>
                     </Radio>
                   </div>
-                  <div className="border-b-[1px]  border-[#c3c3c3]">
-                    <Radio w="full" size="sm" value="2">
-                      <div className="justify-between flex">
-                        <span> Screen Printing - 2 colors</span>{' '}
-                        <span>+ € 0.00</span>
+                  {FrontandBackpricesTable[quantityRange].map((item, i) => {
+                    return (
+                      <div className="border-b-[1px]  border-[#c3c3c3]">
+                        <Radio
+                          w="full"
+                          size="sm"
+                          value={`${String(item)}-${i}`}>
+                          <div className="justify-between flex">
+                            <span>
+                              Screen Printing - {i + 1 < 6 ? i + 1 : 'full'}{' '}
+                              color
+                            </span>
+                            <span>+ € {item}</span>
+                          </div>
+                        </Radio>
                       </div>
-                    </Radio>
-                  </div>
-                  <div className="border-b-[1px]  border-[#c3c3c3]">
-                    <Radio w="full" size="sm" value="3">
-                      <div className="justify-between flex">
-                        <span> Screen Printing - 3 colors</span>{' '}
-                        <span>+ € 0.00</span>
-                      </div>
-                    </Radio>
-                  </div>
-                  <div className="border-b-[1px]  border-[#c3c3c3]">
-                    <Radio w="full" size="sm" value="4">
-                      <div className="justify-between flex">
-                        <span> Screen Printing - 4 colors</span>{' '}
-                        <span>+ € 0.00</span>
-                      </div>
-                    </Radio>
-                  </div>
-                  <div className="border-b-[1px]  border-[#c3c3c3]">
-                    <Radio w="full" size="sm" value="5">
-                      <div className="justify-between flex">
-                        <span> Screen Printing - 5 colors</span>{' '}
-                        <span>+ € 0.00</span>
-                      </div>
-                    </Radio>
-                  </div>
-                  <div className="border-b-[1px]  border-[#c3c3c3]">
-                    <Radio w="full" size="sm" value="full">
-                      <div className="justify-between flex">
-                        <span> Screen Printing - full colors</span>{' '}
-                        <span>+ € 0.00</span>
-                      </div>
-                    </Radio>
-                  </div>
+                    )
+                  })}
                 </Stack>
               </RadioGroup>
             </div>
@@ -124,60 +146,30 @@ export const PrintsMenu = ({ selectedStep }) => {
                 value={rightSlave}>
                 <Stack direction="column">
                   <div className="border-b-[1px]  border-[#c3c3c3]">
-                    <Radio w="full" size="sm" value="0">
+                    <Radio w="full" size="sm" value={0}>
                       <div className="justify-between flex">
                         <span> none</span> <span>+ € 0.00</span>
                       </div>
                     </Radio>
                   </div>
-                  <div className="border-b-[1px]  border-[#c3c3c3]">
-                    <Radio w="full" size="sm" value="1">
-                      <div className="justify-between flex">
-                        <span> Screen Printing - 1 color</span>{' '}
-                        <span>+ € 0.00</span>
+                  {sleevepricesTable[quantityRange].map((item, i) => {
+                    return (
+                      <div className="border-b-[1px]  border-[#c3c3c3]">
+                        <Radio
+                          w="full"
+                          size="sm"
+                          value={`${String(item)}-${i}`}>
+                          <div className="justify-between flex">
+                            <span>
+                              Screen Printing - {i + 1 < 6 ? i + 1 : 'full'}{' '}
+                              color
+                            </span>
+                            <span>+ € {item}</span>
+                          </div>
+                        </Radio>
                       </div>
-                    </Radio>
-                  </div>
-                  <div className="border-b-[1px]  border-[#c3c3c3]">
-                    <Radio w="full" size="sm" value="2">
-                      <div className="justify-between flex">
-                        <span> Screen Printing - 2 colors</span>{' '}
-                        <span>+ € 0.00</span>
-                      </div>
-                    </Radio>
-                  </div>
-                  <div className="border-b-[1px]  border-[#c3c3c3]">
-                    <Radio w="full" size="sm" value="3">
-                      <div className="justify-between flex">
-                        <span> Screen Printing - 3 colors</span>{' '}
-                        <span>+ € 0.00</span>
-                      </div>
-                    </Radio>
-                  </div>
-                  <div className="border-b-[1px]  border-[#c3c3c3]">
-                    <Radio w="full" size="sm" value="4">
-                      <div className="justify-between flex">
-                        <span> Screen Printing - 4 colors</span>{' '}
-                        <span>+ € 0.00</span>
-                      </div>
-                    </Radio>
-                  </div>
-                  <div className="border-b-[1px]  border-[#c3c3c3]">
-                    <Radio w="full" size="sm" value="5">
-                      <div className="justify-between flex">
-                        <span> Screen Printing - 5 colors</span>{' '}
-                        <span>+ € 0.00</span>
-                      </div>
-                    </Radio>
-                  </div>
-                  <div className="border-b-[1px]  border-[#c3c3c3]">
-                    <Radio w="full" size="sm" value="full">
-                      <div className="justify-between flex">
-                        <span> Screen Printing - full colors</span>{' '}
-                        <span>+ € 0.00</span>
-                      </div>
-                    </Radio>
-                  </div>
+                    )
+                  })}
                 </Stack>
               </RadioGroup>
             </div>
@@ -196,60 +188,30 @@ export const PrintsMenu = ({ selectedStep }) => {
                 value={leftSlave}>
                 <Stack direction="column">
                   <div className="border-b-[1px]  border-[#c3c3c3]">
-                    <Radio w="full" size="sm" value="0">
+                    <Radio w="full" size="sm" value={0}>
                       <div className="justify-between flex">
                         <span> none</span> <span>+ € 0.00</span>
                       </div>
                     </Radio>
                   </div>
-                  <div className="border-b-[1px]  border-[#c3c3c3]">
-                    <Radio w="full" size="sm" value="1">
-                      <div className="justify-between flex">
-                        <span> Screen Printing - 1 color</span>{' '}
-                        <span>+ € 0.00</span>
+                  {sleevepricesTable[quantityRange].map((item, i) => {
+                    return (
+                      <div className="border-b-[1px]  border-[#c3c3c3]">
+                        <Radio
+                          w="full"
+                          size="sm"
+                          value={`${String(item)}-${i}`}>
+                          <div className="justify-between flex">
+                            <span>
+                              Screen Printing - {i + 1 < 6 ? i + 1 : 'full'}{' '}
+                              color
+                            </span>
+                            <span>+ € {item}</span>
+                          </div>
+                        </Radio>
                       </div>
-                    </Radio>
-                  </div>
-                  <div className="border-b-[1px]  border-[#c3c3c3]">
-                    <Radio w="full" size="sm" value="2">
-                      <div className="justify-between flex">
-                        <span> Screen Printing - 2 colors</span>{' '}
-                        <span>+ € 0.00</span>
-                      </div>
-                    </Radio>
-                  </div>
-                  <div className="border-b-[1px]  border-[#c3c3c3]">
-                    <Radio w="full" size="sm" value="3">
-                      <div className="justify-between flex">
-                        <span> Screen Printing - 3 colors</span>{' '}
-                        <span>+ € 0.00</span>
-                      </div>
-                    </Radio>
-                  </div>
-                  <div className="border-b-[1px]  border-[#c3c3c3]">
-                    <Radio w="full" size="sm" value="4">
-                      <div className="justify-between flex">
-                        <span> Screen Printing - 4 colors</span>{' '}
-                        <span>+ € 0.00</span>
-                      </div>
-                    </Radio>
-                  </div>
-                  <div className="border-b-[1px]  border-[#c3c3c3]">
-                    <Radio w="full" size="sm" value="5">
-                      <div className="justify-between flex">
-                        <span> Screen Printing - 5 colors</span>{' '}
-                        <span>+ € 0.00</span>
-                      </div>
-                    </Radio>
-                  </div>
-                  <div className="border-b-[1px]  border-[#c3c3c3]">
-                    <Radio w="full" size="sm" value="full">
-                      <div className="justify-between flex">
-                        <span> Screen Printing - full colors</span>{' '}
-                        <span>+ € 0.00</span>
-                      </div>
-                    </Radio>
-                  </div>
+                    )
+                  })}
                 </Stack>
               </RadioGroup>
             </div>
@@ -268,60 +230,30 @@ export const PrintsMenu = ({ selectedStep }) => {
                 value={internalNeck}>
                 <Stack direction="column">
                   <div className="border-b-[1px]  border-[#c3c3c3]">
-                    <Radio w="full" size="sm" value="0">
+                    <Radio w="full" size="sm" value={0}>
                       <div className="justify-between flex">
                         <span> none</span> <span>+ € 0.00</span>
                       </div>
                     </Radio>
                   </div>
-                  <div className="border-b-[1px]  border-[#c3c3c3]">
-                    <Radio w="full" size="sm" value="1">
-                      <div className="justify-between flex">
-                        <span> Screen Printing - 1 color</span>{' '}
-                        <span>+ € 0.00</span>
+                  {neckpricesTable[quantityRange].map((item, i) => {
+                    return (
+                      <div className="border-b-[1px]  border-[#c3c3c3]">
+                        <Radio
+                          w="full"
+                          size="sm"
+                          value={`${String(item)}-${i}`}>
+                          <div className="justify-between flex">
+                            <span>
+                              Screen Printing - {i + 1 < 6 ? i + 1 : 'full'}{' '}
+                              color
+                            </span>
+                            <span>+ € {item}</span>
+                          </div>
+                        </Radio>
                       </div>
-                    </Radio>
-                  </div>
-                  <div className="border-b-[1px]  border-[#c3c3c3]">
-                    <Radio w="full" size="sm" value="2">
-                      <div className="justify-between flex">
-                        <span> Screen Printing - 2 colors</span>{' '}
-                        <span>+ € 0.00</span>
-                      </div>
-                    </Radio>
-                  </div>
-                  <div className="border-b-[1px]  border-[#c3c3c3]">
-                    <Radio w="full" size="sm" value="3">
-                      <div className="justify-between flex">
-                        <span> Screen Printing - 3 colors</span>{' '}
-                        <span>+ € 0.00</span>
-                      </div>
-                    </Radio>
-                  </div>
-                  <div className="border-b-[1px]  border-[#c3c3c3]">
-                    <Radio w="full" size="sm" value="4">
-                      <div className="justify-between flex">
-                        <span> Screen Printing - 4 colors</span>{' '}
-                        <span>+ € 0.00</span>
-                      </div>
-                    </Radio>
-                  </div>
-                  <div className="border-b-[1px]  border-[#c3c3c3]">
-                    <Radio w="full" size="sm" value="5">
-                      <div className="justify-between flex">
-                        <span> Screen Printing - 5 colors</span>{' '}
-                        <span>+ € 0.00</span>
-                      </div>
-                    </Radio>
-                  </div>
-                  <div className="border-b-[1px]  border-[#c3c3c3]">
-                    <Radio w="full" size="sm" value="full">
-                      <div className="justify-between flex">
-                        <span> Screen Printing - full colors</span>{' '}
-                        <span>+ € 0.00</span>
-                      </div>
-                    </Radio>
-                  </div>
+                    )
+                  })}
                 </Stack>
               </RadioGroup>
             </div>

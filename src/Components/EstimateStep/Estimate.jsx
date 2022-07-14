@@ -1,7 +1,8 @@
+/* eslint-disable radix */
 import React, { useState } from 'react'
 import { Button } from '@chakra-ui/react'
 import { useRecoilState } from 'recoil'
-import { unitCostAtom } from 'recoil/atoms'
+import { quantityAtom, unitCostAtom } from 'recoil/atoms'
 import { DeliveryMenu } from '../Menus/DeliveryMenu'
 import { PackagingMenu } from '../Menus/PackagingMenu'
 import { PrintsMenu } from '../Menus/PrintsMenu'
@@ -12,7 +13,12 @@ import { EnquireForm } from '../EnquireForm'
 
 export const Estimate = () => {
   const [unutCost] = useRecoilState(unitCostAtom)
+  const [quantity] = useRecoilState(quantityAtom)
+
   const [selectedStep, setselectedStep] = useState(1)
+
+  const vat = Number(((unutCost * quantity * 1.22) / 100).toFixed(5))
+  const total = vat + unutCost * quantity
   return (
     <div>
       <Steps selectedStep={selectedStep} />
@@ -45,10 +51,15 @@ export const Estimate = () => {
                   </div>
                 </div>
               </div>
+              <h2>Please select a quantity</h2>
               <QuantityMenu selectedStep={selectedStep} />
-              <PrintsMenu selectedStep={selectedStep} />
-              <PackagingMenu selectedStep={selectedStep} />
-              <DeliveryMenu selectedStep={selectedStep} />
+              {quantity > 10 && (
+                <>
+                  <PrintsMenu selectedStep={selectedStep} />
+                  <PackagingMenu selectedStep={selectedStep} />
+                  <DeliveryMenu selectedStep={selectedStep} />
+                </>
+              )}
             </>
           ) : (
             <EnquireForm />
@@ -95,23 +106,23 @@ export const Estimate = () => {
               <div className="flex justify-between">
                 <span>Net total</span>
                 <span>
-                  <b>€ 297.00</b>
+                  <b>€ {unutCost * quantity}</b>
                 </span>
               </div>
               <div className="flex justify-between">
                 <span>VAT XX%</span>
                 <span>
-                  <b>€ 70.00</b>
+                  <b>€ {vat}</b>
                 </span>
               </div>
             </div>
             <div className=" py-6 ">
               <div className="flex justify-between text-xl">
                 <span>
-                  <b>Subtotal</b>
+                  <b>Total</b>
                 </span>
                 <span>
-                  <b>€ 370.00</b>
+                  <b>€ {total}</b>
                 </span>
               </div>
             </div>
