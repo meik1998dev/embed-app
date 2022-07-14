@@ -61,7 +61,8 @@ export const Estimate = () => {
     format(printFront)
 
   const vat = Number(((tshirtCost * quantity * 22) / 100).toFixed(2))
-  const total = vat + tshirtCost * quantity + format(delevery)
+
+  const total = (vat + tshirtCost * quantity + format(delevery)).toFixed(2)
   return (
     <div>
       <Steps selectedStep={selectedStep} />
@@ -83,7 +84,7 @@ export const Estimate = () => {
                   <div className="border-b-[1px] text-orange py-2 flex gap-8 border-slate-400">
                     <span>tshirts</span>
                     <span>
-                      <b>100</b>
+                      <b>{quantity}</b>
                     </span>
                   </div>
                   <div className="border-b-[1px] text-orange py-2 flex gap-8 border-slate-400">
@@ -96,13 +97,9 @@ export const Estimate = () => {
               </div>
               <h2>Please select a quantity</h2>
               <QuantityMenu selectedStep={selectedStep} />
-              {quantity > 10 && (
-                <>
-                  <PrintsMenu selectedStep={selectedStep} />
-                  <PackagingMenu selectedStep={selectedStep} />
-                  <DeliveryMenu selectedStep={selectedStep} />
-                </>
-              )}
+              {quantity > 10 && <PrintsMenu selectedStep={selectedStep} />}
+              {quantity > 10 && <DeliveryMenu selectedStep={selectedStep} />}
+              {quantity > 0 && <PackagingMenu selectedStep={selectedStep} />}
             </>
           ) : (
             <EnquireForm />
@@ -122,8 +119,8 @@ export const Estimate = () => {
             </Button>
           )}
         </div>
-        <div className=" md:w-1/3 w-full flex-col flex">
-          <div className="bg-gray p-7 rounded-2xl">
+        <div className=" md:w-1/3 md:relative w-full flex-col flex">
+          <div className="bg-gray p-7 md:fixed md:w-1/4 rounded-2xl">
             <h3 className="text-blue font-bold">ESTIMATE</h3>
             <div className="flex flex-col border-b-[1px] gap-2 py-6 border-black">
               <div className="flex justify-between">
@@ -151,7 +148,7 @@ export const Estimate = () => {
               <div className="flex justify-between">
                 <span>Net total</span>
                 <span>
-                  <b>€ {tshirtCost * quantity}</b>
+                  <b>€ {(tshirtCost * quantity).toFixed(2)}</b>
                 </span>
               </div>
               <div className="flex justify-between">

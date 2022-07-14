@@ -15,6 +15,43 @@ export const QuantityMenu = ({ selectedStep }) => {
     value = parseInt(value)
     setQuentity(value)
 
+    if (value === 1) {
+      setUnitCost(19.9)
+      setQuentityRange(null)
+    }
+    if (value === 2) {
+      setUnitCost(16.9)
+      setQuentityRange(null)
+    }
+    if (value === 3) {
+      setUnitCost(16.5)
+      setQuentityRange(null)
+    }
+    if (value === 4) {
+      setUnitCost(16)
+      setQuentityRange(null)
+    }
+    if (value === 5) {
+      setUnitCost(15.5)
+      setQuentityRange(null)
+    }
+    if (value === 6) {
+      setUnitCost(15.3)
+      setQuentityRange(null)
+    }
+    if (value === 7) {
+      setUnitCost(15)
+      setQuentityRange(null)
+    }
+    if (value === 8) {
+      setUnitCost(14.8)
+      setQuentityRange(null)
+    }
+    if (value === 9) {
+      setUnitCost(14.5)
+      setQuentityRange(null)
+    }
+
     if (value >= 10 && value <= 19) {
       setUnitCost(9)
       setQuentityRange('10-19')

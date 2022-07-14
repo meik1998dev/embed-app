@@ -19,6 +19,7 @@ import front from '../../Assets/front.png'
 import right from '../../Assets/right.png'
 import neck from '../../Assets/neck.png'
 import left from '../../Assets/left.png'
+import back from '../../Assets/back.png'
 
 export const PrintsMenu = ({ selectedStep }) => {
   const [rightSlave, setrightSlave] = useRecoilState(rightSlaveAtom)
@@ -69,7 +70,7 @@ export const PrintsMenu = ({ selectedStep }) => {
                 value={printFront}>
                 <Stack direction="column">
                   <div className="border-b-[1px]  border-[#c3c3c3]">
-                    <Radio w="full" size="sm" value={0}>
+                    <Radio w="full" size="sm" value={(0).toString()}>
                       <div className="justify-between flex">
                         <span> none</span> <span>+ € 0.00</span>
                       </div>
@@ -103,7 +104,7 @@ export const PrintsMenu = ({ selectedStep }) => {
               Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
             </p>
             <div className="flex gap-6 py-4 items-center">
-              <img src={front} alt="front" />
+              <img src={back} alt="front" />
               <RadioGroup
                 w="full"
                 colorScheme="green"
@@ -111,7 +112,7 @@ export const PrintsMenu = ({ selectedStep }) => {
                 value={printBack}>
                 <Stack direction="column">
                   <div className="border-b-[1px]  border-[#c3c3c3]">
-                    <Radio w="full" size="sm" value={0}>
+                    <Radio w="full" size="sm" value={(0).toString()}>
                       <div className="justify-between flex">
                         <span> none</span> <span>+ € 0.00</span>
                       </div>
@@ -153,7 +154,7 @@ export const PrintsMenu = ({ selectedStep }) => {
                 value={rightSlave}>
                 <Stack direction="column">
                   <div className="border-b-[1px]  border-[#c3c3c3]">
-                    <Radio w="full" size="sm" value={0}>
+                    <Radio w="full" size="sm" value={(0).toString()}>
                       <div className="justify-between flex">
                         <span> none</span> <span>+ € 0.00</span>
                       </div>
@@ -195,7 +196,7 @@ export const PrintsMenu = ({ selectedStep }) => {
                 value={leftSlave}>
                 <Stack direction="column">
                   <div className="border-b-[1px]  border-[#c3c3c3]">
-                    <Radio w="full" size="sm" value={0}>
+                    <Radio w="full" size="sm" value={(0).toString()}>
                       <div className="justify-between flex">
                         <span> none</span> <span>+ € 0.00</span>
                       </div>
@@ -237,7 +238,7 @@ export const PrintsMenu = ({ selectedStep }) => {
                 value={internalNeck}>
                 <Stack direction="column">
                   <div className="border-b-[1px]  border-[#c3c3c3]">
-                    <Radio w="full" size="sm" value={0}>
+                    <Radio w="full" size="sm" value={(0).toString()}>
                       <div className="justify-between flex">
                         <span> none</span> <span>+ € 0.00</span>
                       </div>
