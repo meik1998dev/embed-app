@@ -75,8 +75,8 @@ export const Estimate = () => {
           </h1>
           {selectedStep !== 3 ? (
             <>
-              <div className="flex w-full mx-auto gap-2 my-4">
-                <img className="px-11" src={tshirts} alt="" />
+              <div className="flex w-full sm:flex-nowrap items-center justify-center flex-wrap mx-auto gap-2 my-4">
+                <img className="px-11 " src={tshirts} alt="" />
                 <div className="flex flex-col w-full px-2 ">
                   <h2 className="my-2 text-blue font-bold text-lg">
                     UNISEX T-Shirt
@@ -109,10 +109,11 @@ export const Estimate = () => {
             <Button
               h="44px"
               bgColor="#57CC2D"
-              w="400px"
               marginX="auto"
+              className="sm:w-[400px] w-full "
+              disabled={quantity <= 0}
               my="15px"
-              onClick={() => setselectedStep(2)}
+              onClick={() => setselectedStep(3)}
               rounded="19px"
               textColor="white">
               DONE
@@ -120,7 +121,7 @@ export const Estimate = () => {
           )}
         </div>
         <div className=" md:w-1/3 md:relative w-full flex-col flex">
-          <div className="bg-gray p-7 md:fixed md:w-1/4 rounded-2xl">
+          <div className="bg-gray p-7 md:fixed md:w-[30%] w-full rounded-2xl">
             <h3 className="text-blue font-bold">ESTIMATE</h3>
             <div className="flex flex-col border-b-[1px] gap-2 py-6 border-black">
               <div className="flex justify-between">
@@ -142,7 +143,7 @@ export const Estimate = () => {
               <div className="flex justify-between">
                 <span>Unit Cost</span>
                 <span>
-                  <b>€ {tshirtCost}</b>
+                  <b>€ {tshirtCost.toFixed(2)}</b>
                 </span>
               </div>
               <div className="flex justify-between">
@@ -154,7 +155,7 @@ export const Estimate = () => {
               <div className="flex justify-between">
                 <span>VAT XX%</span>
                 <span>
-                  <b>€ {vat}</b>
+                  <b>€ {vat.toFixed(2)}</b>
                 </span>
               </div>
             </div>
@@ -168,32 +169,21 @@ export const Estimate = () => {
                 </span>
               </div>
             </div>
+            {selectedStep === 3 && (
+              <>
+                <Button
+                  h="44px"
+                  bgColor="transparent"
+                  w="full"
+                  marginX="auto"
+                  onClick={() => setselectedStep(1)}
+                  rounded="19px"
+                  textColor="black">
+                  MODIFY
+                </Button>
+              </>
+            )}
           </div>
-          {selectedStep === 2 && (
-            <>
-              <Button
-                h="44px"
-                bgColor="#57CC2D"
-                w="400px"
-                marginX="auto"
-                my="15px"
-                onClick={() => setselectedStep(3)}
-                rounded="19px"
-                textColor="white">
-                CONFIRM
-              </Button>
-              <Button
-                h="44px"
-                bgColor="transparent"
-                w="400px"
-                marginX="auto"
-                onClick={() => setselectedStep(1)}
-                rounded="19px"
-                textColor="black">
-                MODIFY
-              </Button>
-            </>
-          )}
         </div>
       </div>
     </div>
