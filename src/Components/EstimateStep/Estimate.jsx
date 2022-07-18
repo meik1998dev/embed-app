@@ -40,13 +40,13 @@ export const Estimate = () => {
   }
 
   const getDeleverytext = (item) => {
-    if (item === 0) return '20 Working days'
+    if (item === 0) return '20 giorni lavorativi'
 
     const index = Number(item.split('-')[1])
-    if (index === 0) return '7 Working days'
-    if (index === 1) return '10 Working days'
-    if (index === 2) return '14 Working days'
-    if (index === 3) return '20 Working days'
+    if (index === 0) return '7 giorni lavorativi'
+    if (index === 1) return '10 giorni lavorativi'
+    if (index === 2) return '14 giorni lavorativi'
+    if (index === 3) return '20 giorni lavorativi'
   }
 
   const [selectedStep, setselectedStep] = useState(1)
@@ -69,7 +69,7 @@ export const Estimate = () => {
       <div className="flex lg:w-9/12 w-full mx-auto px-2  md:flex-nowrap flex-wrap py-4 gap-5">
         <div className="md:w-2/3 w-full flex flex-col gap-5">
           <h1 className="text-blue font-bold text-2xl">
-            {selectedStep === 1 && 'GET YOUR ESTIMATE'}
+            {selectedStep === 1 && 'Chiedi un preventivo gratuito'}
             {selectedStep === 2 && 'SUMMERY'}
             {selectedStep === 3 && 'ENQUIRE'}
           </h1>
@@ -79,8 +79,14 @@ export const Estimate = () => {
                 <img className="px-11 " src={tshirts} alt="" />
                 <div className="flex flex-col w-full px-2 ">
                   <h2 className="my-2 text-blue font-bold text-lg">
-                    UNISEX T-Shirt
+                    T-SHIRT TEETOGO
                   </h2>
+                  <ul className="text-xs">
+                    <li>- 100% cotone organico 145 gr.</li>
+                    <li>- Manica corta/girocollo</li>
+                    <li>- Modello unisex</li>
+                    <li>- Vestibilità regolare</li>
+                  </ul>
                   <div className="border-b-[1px] text-orange py-2 flex gap-8 border-slate-400">
                     <span>tshirts</span>
                     <span>
@@ -95,7 +101,10 @@ export const Estimate = () => {
                   </div>
                 </div>
               </div>
-              <h2>Please select a quantity</h2>
+              <h2>
+                Le taglie e i colori delle t-shirt saranno selezionati in fase
+                di acquisto
+              </h2>
               <QuantityMenu selectedStep={selectedStep} />
               {quantity >= 10 && <PrintsMenu selectedStep={selectedStep} />}
               {quantity >= 10 && <DeliveryMenu selectedStep={selectedStep} />}
@@ -122,38 +131,40 @@ export const Estimate = () => {
         </div>
         <div className=" md:w-1/3 md:relative w-full flex-col flex">
           <div className="bg-gray p-7 md:fixed md:w-[30%] w-full rounded-2xl">
-            <h3 className="text-blue font-bold">ESTIMATE</h3>
+            <h3 className="text-blue font-bold">PREZZO</h3>
             <div className="flex flex-col border-b-[1px] gap-2 py-6 border-black">
               <div className="flex justify-between">
-                <span>Delivery date</span>
+                <span>Tempistiche di consegna</span>
                 <span>
                   <b>{getDeleverytext(delevery)}</b>
                 </span>
               </div>
               <div className="flex justify-between">
-                <span>Shipping</span>
+                <span>Spedizione</span>
                 <span>
                   <b>
-                    {format(delevery) === 0 ? 'Free' : `€ ${format(delevery)}`}
+                    {format(delevery) === 0
+                      ? 'Gratuita'
+                      : `€ ${format(delevery)}`}
                   </b>
                 </span>
               </div>
             </div>
             <div className="flex flex-col border-b-[1px] gap-2 py-6 border-black">
               <div className="flex justify-between">
-                <span>Unit Cost</span>
+                <span>Costo unitario</span>
                 <span>
                   <b>€ {tshirtCost.toFixed(2)}</b>
                 </span>
               </div>
               <div className="flex justify-between">
-                <span>Net total</span>
+                <span>Totale netto</span>
                 <span>
                   <b>€ {(tshirtCost * quantity).toFixed(2)}</b>
                 </span>
               </div>
               <div className="flex justify-between">
-                <span>VAT XX%</span>
+                <span>IVA 22%</span>
                 <span>
                   <b>€ {vat.toFixed(2)}</b>
                 </span>
@@ -162,7 +173,7 @@ export const Estimate = () => {
             <div className=" py-6 ">
               <div className="flex justify-between text-xl">
                 <span>
-                  <b>Total</b>
+                  <b>Totale iva incl.</b>
                 </span>
                 <span>
                   <b>€ {total}</b>

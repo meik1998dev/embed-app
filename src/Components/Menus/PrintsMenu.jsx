@@ -29,7 +29,7 @@ export const PrintsMenu = ({ selectedStep }) => {
   const [printBack, setPrintBack] = useRecoilState(printBackAtom)
   const [quantityRange] = useRecoilState(quantityRangeAtom)
   return (
-    <CollapsableMenu title="PRINTS">
+    <CollapsableMenu title="Stampa">
       {selectedStep === 2 ? (
         <div className="flex flex-col">
           <div className="flex justify-between border-b-[1px]  border-[#c3c3c3] pt-2">
@@ -56,9 +56,10 @@ export const PrintsMenu = ({ selectedStep }) => {
       ) : (
         <div className="flex flex-col gap-2">
           <div className="flex flex-col gap-2 border-b-[1px] border-black">
-            <b className="text-blue text-sm">Front</b>{' '}
+            <b className="text-blue text-sm">FRONTE</b>{' '}
             <p className="italic text-sm">
-              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+              Indicaci come vorresti la stampa su questo lato, la misura massima
+              di stampa è 40 cm x 60 cm.{' '}
             </p>
             <div className="flex gap-6 py-4 items-center">
               <img src={front} alt="front" />
@@ -71,7 +72,7 @@ export const PrintsMenu = ({ selectedStep }) => {
                   <div className="border-b-[1px]  border-[#c3c3c3]">
                     <Radio w="full" size="sm" value={(0).toString()}>
                       <div className="justify-between flex">
-                        <span> none</span> <span>+ € 0.00</span>
+                        <span> Nessuna stampa</span> <span>+ € 0.00</span>
                       </div>
                     </Radio>
                   </div>
@@ -84,8 +85,9 @@ export const PrintsMenu = ({ selectedStep }) => {
                           value={`${String(item)}-${i}`}>
                           <div className="justify-between flex">
                             <span>
-                              Screen Printing - {i + 1 < 6 ? i + 1 : 'full'}{' '}
-                              color
+                              {i + 1 < 6
+                                ? `Screen Printing -  ${i + 1} colore`
+                                : 'DTG - full color (dimensione massima 38 cm x 42 cm)'}{' '}
                             </span>
                             <span>+ € {item}</span>
                           </div>
@@ -100,7 +102,8 @@ export const PrintsMenu = ({ selectedStep }) => {
           <div className="flex flex-col gap-2 border-b-[1px] border-black">
             <b className="text-blue text-sm">Back</b>{' '}
             <p className="italic text-sm">
-              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+              Indicaci come vorresti la stampa su questo lato, la misura massima
+              di stampa è 40 cm x 60 cm.{' '}
             </p>
             <div className="flex gap-6 py-4 items-center">
               <img src={back} alt="front" />
@@ -113,7 +116,7 @@ export const PrintsMenu = ({ selectedStep }) => {
                   <div className="border-b-[1px]  border-[#c3c3c3]">
                     <Radio w="full" size="sm" value={(0).toString()}>
                       <div className="justify-between flex">
-                        <span> none</span> <span>+ € 0.00</span>
+                        <span> Nessuna stampa</span> <span>+ € 0.00</span>
                       </div>
                     </Radio>
                   </div>
@@ -126,8 +129,9 @@ export const PrintsMenu = ({ selectedStep }) => {
                           value={`${String(item)}-${i}`}>
                           <div className="justify-between flex">
                             <span>
-                              Screen Printing - {i + 1 < 6 ? i + 1 : 'full'}{' '}
-                              color
+                              {i + 1 < 6
+                                ? `Screen Printing -  ${i + 1} colore`
+                                : 'DTG - full color (dimensione massima 38 cm x 42 cm)'}{' '}
                             </span>
                             <span>+ € {item}</span>
                           </div>
@@ -140,9 +144,10 @@ export const PrintsMenu = ({ selectedStep }) => {
             </div>
           </div>
           <div className="flex flex-col gap-2 border-b-[1px] border-black">
-            <b className="text-blue text-sm">RIGHT SLEEVE</b>{' '}
+            <b className="text-blue text-sm">MANICA DESTRA</b>{' '}
             <p className="italic text-sm">
-              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+              Indica la stampa che vorresti su questo lato, la dimensione
+              massima è 10 cm x 10 cm
             </p>
             <div className="flex gap-6 py-4 items-center">
               <img src={right} alt="front" />
@@ -155,7 +160,7 @@ export const PrintsMenu = ({ selectedStep }) => {
                   <div className="border-b-[1px]  border-[#c3c3c3]">
                     <Radio w="full" size="sm" value={(0).toString()}>
                       <div className="justify-between flex">
-                        <span> none</span> <span>+ € 0.00</span>
+                        <span> Nessuna stampa</span> <span>+ € 0.00</span>
                       </div>
                     </Radio>
                   </div>
@@ -168,8 +173,9 @@ export const PrintsMenu = ({ selectedStep }) => {
                           value={`${String(item)}-${i}`}>
                           <div className="justify-between flex">
                             <span>
-                              Screen Printing - {i + 1 < 6 ? i + 1 : 'full'}{' '}
-                              color
+                              {i + 1 < 6
+                                ? `Screen Printing -  ${i + 1} colore`
+                                : 'DTG - full color'}{' '}
                             </span>
                             <span>+ € {item}</span>
                           </div>
@@ -182,9 +188,10 @@ export const PrintsMenu = ({ selectedStep }) => {
             </div>
           </div>
           <div className="flex flex-col gap-2 border-b-[1px] border-black">
-            <b className="text-blue text-sm">LEFT SLEEVE</b>{' '}
+            <b className="text-blue text-sm">MANICA SINISTRA</b>{' '}
             <p className="italic text-sm">
-              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+              Indica la stampa che vorresti su questo lato, la dimensione
+              massima è 10 cm x 10 cm
             </p>
             <div className="flex gap-6 py-4 items-center">
               <img src={left} alt="front" />
@@ -197,7 +204,7 @@ export const PrintsMenu = ({ selectedStep }) => {
                   <div className="border-b-[1px]  border-[#c3c3c3]">
                     <Radio w="full" size="sm" value={(0).toString()}>
                       <div className="justify-between flex">
-                        <span> none</span> <span>+ € 0.00</span>
+                        <span> Nessuna stampa</span> <span>+ € 0.00</span>
                       </div>
                     </Radio>
                   </div>
@@ -210,8 +217,9 @@ export const PrintsMenu = ({ selectedStep }) => {
                           value={`${String(item)}-${i}`}>
                           <div className="justify-between flex">
                             <span>
-                              Screen Printing - {i + 1 < 6 ? i + 1 : 'full'}{' '}
-                              color
+                              {i + 1 < 6
+                                ? `Screen Printing -  ${i + 1} colore`
+                                : 'DTG - full color'}{' '}
                             </span>
                             <span>+ € {item}</span>
                           </div>
@@ -224,9 +232,10 @@ export const PrintsMenu = ({ selectedStep }) => {
             </div>
           </div>
           <div className="flex flex-col gap-2 border-b-[1px] border-black">
-            <b className="text-blue text-sm">INTERNAL NECK</b>{' '}
+            <b className="text-blue text-sm">ETICHETTA INTERNA</b>{' '}
             <p className="italic text-sm">
-              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+              Puoi personalizzare la tua etichetta fino ad una dimensione di 7
+              cm x 3 cm.
             </p>
             <div className="flex gap-6 py-4 items-center">
               <img src={neck} alt="front" />
@@ -239,7 +248,7 @@ export const PrintsMenu = ({ selectedStep }) => {
                   <div className="border-b-[1px]  border-[#c3c3c3]">
                     <Radio w="full" size="sm" value={(0).toString()}>
                       <div className="justify-between flex">
-                        <span> none</span> <span>+ € 0.00</span>
+                        <span> Nessuna stampa</span> <span>+ € 0.00</span>
                       </div>
                     </Radio>
                   </div>
@@ -252,8 +261,9 @@ export const PrintsMenu = ({ selectedStep }) => {
                           value={`${String(item)}-${i}`}>
                           <div className="justify-between flex">
                             <span>
-                              Screen Printing - {i + 1 < 6 ? i + 1 : 'full'}{' '}
-                              color
+                              {i + 1 < 6
+                                ? `Screen Printing -  ${i + 1} colore`
+                                : 'DTG - full color'}{' '}
                             </span>
                             <span>+ € {item}</span>
                           </div>

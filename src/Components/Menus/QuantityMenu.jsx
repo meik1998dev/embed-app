@@ -126,19 +126,18 @@ export const QuantityMenu = ({ selectedStep }) => {
   }
 
   return (
-    <CollapsableMenu title="QUANTITY ">
+    <CollapsableMenu title="Quantità ">
       {selectedStep === 2 ? (
         <div className="flex justify-between">
-          <b className="text-blue text-sm">Total Quantity</b>{' '}
-          <span> 40 pcs</span>
+          <b className="text-blue text-sm">Total </b> <span> 40 pcs</span>
         </div>
       ) : (
         <div className="flex flex-col gap-2">
           <p className="italic text-sm">
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+            Seleziona il numero totale di t-shirt che ti servono{' '}
           </p>
           <div className="flex justify-between">
-            <b className="text-blue text-sm">Total Quantity</b>{' '}
+            <b className="text-blue text-sm">Totale magliette</b>{' '}
             <input
               type="number"
               min={0}

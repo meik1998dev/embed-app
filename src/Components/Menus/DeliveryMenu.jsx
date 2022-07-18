@@ -11,7 +11,7 @@ export const DeliveryMenu = ({ selectedStep }) => {
   const [quantityRange] = useRecoilState(quantityRangeAtom)
 
   return (
-    <CollapsableMenu title="DELIVERY">
+    <CollapsableMenu title="CONSEGNA">
       {selectedStep === 2 ? (
         <div className="flex justify-between">
           <b className="text-blue text-sm">Delivery time</b>{' '}
@@ -20,10 +20,11 @@ export const DeliveryMenu = ({ selectedStep }) => {
       ) : (
         <div className="flex flex-col gap-2 ">
           <p className="italic text-sm">
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+            Entro quanto vorresti ricevere il tuo ordine? Le date indicate sono
+            da confermare in fase di acquisto
           </p>
           <div className="flex gap-6 py-4">
-            <b className="text-blue text-sm w-1/5">Delivery time</b>{' '}
+            <b className="text-blue text-sm w-1/5">CONSEGNA</b>{' '}
             <RadioGroup
               w="full"
               colorScheme="green"
@@ -39,7 +40,7 @@ export const DeliveryMenu = ({ selectedStep }) => {
                             {i === 0 && 7}
                             {i === 1 && 10}
                             {i === 2 && 14}
-                            {i === 3 && 20} working days
+                            {i === 3 && 20} Giorni lavorativi
                           </span>
                           <span>+ € {item}</span>
                         </div>
